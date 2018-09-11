@@ -1,0 +1,308 @@
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
+      <a class="navbar-brand text-white bg-dark" (click)="aba= 'home'">Controle Pluvial</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggngler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+
+          <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Referencias
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="https://github.com/grynfox/EasyCRUD/wiki" >Git Hub</a>
+                <a class="dropdown-item" (click)="aba= 'altProd'" >Referencias Utilizadas</a>
+              </div>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Relatorios
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item"  (click)="aba= 'reportProd'">Fluxo Diario</a>
+                  <a class="dropdown-item" (click)="aba= 'reportFluxoMensal'">Fluxo Mensal</a>
+                  <a class="dropdown-item" (click)="aba= 'reportCat'">Fluxo Anual</a>
+                </div>
+              </div>
+        </ul>
+      </div>
+    </nav>
+
+</body>
+
+<form [ngSwitch]="aba" >
+      <!--Produtos-->
+    <div class="container" *ngSwitchCase="'cadastroProd'">
+        <div class="card card-register mx-auto mt-5">
+          <div class="card-header text-center">Cadastra Produto</div>
+          <div class="card-body">
+            <form>
+              <div class="form-group">
+                <div class="form-row">
+                  <div class="col-md-12">
+                    <label for="NomeProd">Produto</label>
+                    <input class="form-control" id="NomeProd" name="NomeProd" type="text" placeholder="Digite o nome do produto"[(ngModel)]="NomeProd" required>
+                  </div>
+                </div>
+              </div>
+              <label for="categorias">Selecione a categoria</label>
+              <div class="form-group col align-self-center">
+                  <select [(ngModel)]="IdCat" class="custom-select"  name="categorias">
+                      <option *ngFor="let busca of categorias" [value]="busca.IdCat">{{busca.IdCat}} | {{busca.NomeCat}}</option>
+                  </select>
+              </div>
+              <a class="btn btn-primary btn-block" (click)="cadastrarProduto(NomeProd, IdCat);">Cadastrar Produto</a>
+            </form>
+          </div>
+        </div>
+      </div>
+        <div class="container" *ngSwitchCase="'delProd'">
+          <div class="card card-register mx-auto mt-5">
+            <div class="card-header text-center">Deleta Produto</div>
+            <div class="card-body">
+              <form>
+                <div class="form-group">
+                  <div class="form-row">
+                    <div class="col-md-12">
+                      <label for="produtos">Produto</label>
+                        <div class="form-group">
+                          <select [(ngModel)]="IdProd" class="custom-select"  name="produtos">
+                            <option *ngFor="let buscaProd of produtos" [value]="buscaProd.IdProd">{{buscaProd.IdProd}} | {{buscaProd.NomeProd}}</option>
+                        </select>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <a class="btn btn-primary btn-block" (click)="apagarProd(IdProd);">Deletar Produto</a>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="container" *ngSwitchCase="'altProd'">
+            <div class="card card-register mx-auto mt-5">
+              <div class="card-header text-center">Alterar Produto</div>
+              <div class="card-body">
+                <form>
+                    <div class="form-group">
+                        <div class="form-row">
+                          <div class="col-md-12">
+                            <label for="produtos">Produto</label>
+                            <input class="form-control" [(ngModel)]="NomeProd" id="produtos" name="produtos" type="text" placeholder="Digite o novo nome do produto." required>
+                          </div>
+                        </div>
+                      </div>
+                  <div class="form-group">
+                    <div class="form-row">
+                      <div class="col-md-12">
+                        <label for="produtos">Selecione o Produto</label>
+                          <div class="form-group">
+                            <select class="custom-select"  [(ngModel)]="IdProd" name="produtos">
+                                <option *ngFor="let busca of produtos" [value]="busca.IdProd">{{busca.NomeProd}}</option>
+                            </select>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                  <a class="btn btn-primary btn-block" (click)="alterarProd(IdProd);">Alterar Produto</a>
+                </form>
+              </div>
+            </div>
+          </div>
+        <!--Categorias !-->
+        <div class="container" *ngSwitchCase="'cadastroCat'">
+            <div class="card card-register mx-auto mt-5">
+              <div class="card-header text-center">Cadastra Categoria</div>
+              <div class="card-body">
+                <form>
+                  <div class="form-group">
+                    <div class="form-row">
+                      <div class="col-md-12">
+                        <label for="NomeCat">Categoria</label>
+                        <input class="form-control" id="NomeCat" name="NomeCat" type="text" placeholder="Digite o nome da categoria"[(ngModel)]="NomeCat" required>
+                      </div>
+                    </div>
+                  </div>
+                  <a class="btn btn-primary btn-block" (click)="cadastrarCategoria(NomeCat);">Cadastrar Categoria</a>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="container" *ngSwitchCase="'delCat'">
+              <div class="card card-register mx-auto mt-5">
+                <div class="card-header text-center">Deleta Categoria</div>
+                <div class="card-body">
+                  <form>
+                    <div class="form-group">
+                      <div class="form-row">
+                        <div class="col-md-12">
+                          <label for="categorias">Categoria</label>
+                            <div class="form-group">
+                              <select [(ngModel)]="IdCat" class="custom-select"  name="categorias">
+                                  <option *ngFor="let busca of categorias" [value]="busca.IdCat">{{busca.IdCat}} | {{busca.NomeCat}}</option>
+                              </select>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                    <a class="btn btn-primary btn-block" (click)="apagarCat(IdCat);">Deletar Categoria</a>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="container" *ngSwitchCase="'altCat'">
+                <div class="card card-register mx-auto mt-5">
+                  <div class="card-header text-center">Alterar Categoria</div>
+                  <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <div class="form-row">
+                              <div class="col-md-12">
+                                <label for="NomeCat">Categoria</label>
+                                <input class="form-control"  [(ngModel)]= "NomeCat" id="NomeCat" name="NomeCat" type="text" placeholder="Digite o nome da categoria" required>
+                              </div>
+                            </div>
+                          </div>
+                      <div class="form-group">
+                        <div class="form-row">
+                          <div class="col-md-12">
+                            <label for="categorias">Antiga Categoria</label>
+                              <div class="form-group">
+                                <select [(ngModel)]="IdCat" class="custom-select"  name="categorias">
+                                    <option *ngFor="let busca of categorias" [value]="busca.IdCat">{{busca.IdCat}} | {{busca.NomeCat}}</option>
+                                </select>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                      <a class="btn btn-primary btn-block" (click)="alterarCat(IdCat);">Alterar Categoria</a>
+                    </form>
+                  </div>
+                </div>
+              </div>
+<!--Relatorios!-->
+<div class="container" *ngSwitchCase="'reportCat'">
+    <div class="card card-register mx-auto mt-5">
+      <div class="card-header text-center">Relatorio de Categorias Cadastradas</div>
+      <div class="card-body">
+        <form>
+          <div class="table-responsive">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>Codigo Categoria</th>
+                    <th>Categoria</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let busca of categorias">
+                    <td> {{busca.IdCat}} </td>
+                    <td>{{busca.NomeCat}}</td>
+                  </tr>
+                </tbody>
+                </table>
+                </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="container" *ngSwitchCase="'reportProd'">
+      <div class="card card-register mx-auto mt-5">
+        <div class="card-header text-center">Relatorio de Produtos Cadastrados</div>
+        <div class="card-body">
+          <form>
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Codigo Produto</th>
+                      <th>Produto</th>
+                      <th>Categoria</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let busca of produtos">
+                      <td>{{busca.IdProd}} </td>
+                      <td>{{busca.NomeProd}}</td>
+                      <td>{{busca.IdCat}}</td>
+                    </tr>
+                  </tbody>
+                  </table>
+                  </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="container" *ngSwitchCase="'reportFluxoMensal'">
+      <div class="card card-register mx-auto mt-5">
+        <div class="card-header text-center">Relatorio Fluxo Mensal</div>
+        <div class="card-body">
+            <div class="form-row">
+                <div class="col-md-12">
+                  <label for="categorias">Selecione o mes e o ano</label>
+                    <div class="form-group">
+                      <select [(ngModel)]="IdCat" class="custom-select"  name="categorias">
+                          <option *ngFor="let busca of categorias" [value]="busca.IdCat">{{busca.IdCat}} | {{busca.NomeCat}}</option>
+                      </select>
+                      <select [(ngModel)]="IdCat" class="custom-select"  name="categorias">
+                          <option *ngFor="let busca of categorias" [value]="busca.IdCat">{{busca.IdCat}} | {{busca.NomeCat}}</option>
+                      </select>
+
+                    </div>
+                </div>
+              </div>
+              <a class="btn btn-primary btn-block" (click)="reportsProdCat(IdCat);">Gerar Relatorio</a>
+          <form>
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let busca of relatorios">
+                      <td>{{busca.IdProd}} </td>
+                    </tr>
+                  </tbody>
+                  <div class="progress">
+  <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<div class="progress">
+  <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<div class="progress">
+  <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<div class="progress">
+  <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<div class="progress">
+  <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+                  </table>
+                  </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-12 menu-fixed" *ngSwitchCase="'home'">
+      <div class="card text-center">
+        <div class="card-header">
+          <i class="fa fa-bar-chart"></i> Sistema de Controle Pluvial Puc Minas - Poços de Caldas</div>
+        <div class="card-body">
+            <h5 class="card-title">Igor Alexandre Saraiva Silva e Claudio Faria</h5>
+            <p class="card-text"> Com os avanços tecnologicos existentes na area de controle, economia
+            e automação de processos a Puc Minas de Poços de Caldas viu a necessidade de melhorar
+            seu controle pluvial, fazendo assim um sistema totalmente automatizado de controle. </p>
+        </div>
+        <div class="card-footer small text-muted">
+          <a href="https://www.linkedin.com/in/igoralexandre/" class="btn-outline-info">Linkedin - Igor Saraiva</a>
+          <a href="https://www.linkedin.com/in/igoralexandre/" class="btn-outline-info">Linkedin - Claudio Faria</a>
+        </div>
+      </div>
+    </div>
+    </form>
