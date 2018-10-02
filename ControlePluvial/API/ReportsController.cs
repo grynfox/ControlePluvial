@@ -15,13 +15,16 @@ namespace ControlePluvial.API
         {
             this.banco = new BancoContext();
         }
-        [System.Web.Http.HttpGet]
-
-        public IEnumerable<Produto> GetProdCat(int IdCat)
+        [System.Web.Http.HttpPost]
+        public void PulsoHidrometro([FromBody] Reports value)
         {
-            var tmp = this.banco.Produto.Where(linha => linha.Categoria.IdCat == IdCat).ToList();
-             
-            return tmp;
+            DateTime dataPulso = new DateTime();
+            Reports pulso = new Reports();
+            dataPulso = DateTime.Now;
+            pulso = value;
+            pulso.dataPulso = dataPulso;
+            banco.Reports.Add(pulso);
+            banco.SaveChanges();
         }
 
     }

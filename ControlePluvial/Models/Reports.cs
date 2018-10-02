@@ -11,7 +11,8 @@ namespace ControlePluvial.Models
     {
        [Key]
         public int codFlux { get; set; }
-        public DateTime data { get; set; }
+        public string LogRecebimento { get; set; }
+        public DateTime dataPulso { get; set; }
 
     }
 }

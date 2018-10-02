@@ -179,6 +179,10 @@
     <Compile Include="Migrations\201809111140409_FluxoPluvial.Designer.cs">
       <DependentUpon>201809111140409_FluxoPluvial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810010144326_FluxoPluvial1.cs" />
+    <Compile Include="Migrations\201810010144326_FluxoPluvial1.Designer.cs">
+      <DependentUpon>201810010144326_FluxoPluvial1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BancoContext.cs" />
     <Compile Include="Models\Categoria.cs" />
@@ -253,6 +257,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201809111140409_FluxoPluvial.resx">
       <DependentUpon>201809111140409_FluxoPluvial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810010144326_FluxoPluvial1.resx">
+      <DependentUpon>201810010144326_FluxoPluvial1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
