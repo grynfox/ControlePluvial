@@ -49,13 +49,13 @@
                   </div>
                 </div>
               </div>
-              <label for="categorias">Selecione a categoria</label>
+              <label for="arduino">Selecione a categoria</label>
               <div class="form-group col align-self-center">
-                  <select [(ngModel)]="IdCat" class="custom-select"  name="categorias">
-                      <option *ngFor="let busca of categorias" [value]="busca.IdCat">{{busca.IdCat}} | {{busca.NomeCat}}</option>
+                  <select [(ngModel)]="IdLora" class="custom-select"  name="arduino">
+                      <option *ngFor="let busca of arduinos" [value]="busca.IdLora">{{busca.IdLora}} | {{busca.NomeArd}}</option>
                   </select>
               </div>
-              <a class="btn btn-primary btn-block" (click)="cadastrarProduto(NomeProd, IdCat);">Cadastrar Produto</a>
+              <a class="btn btn-primary btn-block" (click)="cadastrarProduto(NomeProd, IdLora);">Cadastrar Produto</a>
             </form>
           </div>
         </div>
@@ -112,7 +112,7 @@
               </div>
             </div>
           </div>
-        <!--Categorias !-->
+        <!--arduino !-->
         <div class="container" *ngSwitchCase="'cadastroCat'">
             <div class="card card-register mx-auto mt-5">
               <div class="card-header text-center">Cadastra Categoria</div>
@@ -121,12 +121,12 @@
                   <div class="form-group">
                     <div class="form-row">
                       <div class="col-md-12">
-                        <label for="NomeCat">Categoria</label>
-                        <input class="form-control" id="NomeCat" name="NomeCat" type="text" placeholder="Digite o nome da categoria"[(ngModel)]="NomeCat" required>
+                        <label for="NomeArd">Categoria</label>
+                        <input class="form-control" id="NomeArd" name="NomeArd" type="text" placeholder="Digite o nome da categoria"[(ngModel)]="NomeArd" required>
                       </div>
                     </div>
                   </div>
-                  <a class="btn btn-primary btn-block" (click)="cadastrarCategoria(NomeCat);">Cadastrar Categoria</a>
+                  <a class="btn btn-primary btn-block" (click)="cadastrarArduino(NomeArd);">Cadastrar Categoria</a>
                 </form>
               </div>
             </div>
@@ -139,16 +139,16 @@
                     <div class="form-group">
                       <div class="form-row">
                         <div class="col-md-12">
-                          <label for="categorias">Categoria</label>
+                          <label for="arduino">Categoria</label>
                             <div class="form-group">
-                              <select [(ngModel)]="IdCat" class="custom-select"  name="categorias">
-                                  <option *ngFor="let busca of categorias" [value]="busca.IdCat">{{busca.IdCat}} | {{busca.NomeCat}}</option>
+                              <select [(ngModel)]="IdLora" class="custom-select"  name="arduino">
+                                  <option *ngFor="let busca of arduinos" [value]="busca.IdLora">{{busca.IdLora}} | {{busca.NomeArd}}</option>
                               </select>
                             </div>
                         </div>
                       </div>
                     </div>
-                    <a class="btn btn-primary btn-block" (click)="apagarCat(IdCat);">Deletar Categoria</a>
+                    <a class="btn btn-primary btn-block" (click)="apagarArd(IdLora);">Deletar Categoria</a>
                   </form>
                 </div>
               </div>
@@ -161,24 +161,24 @@
                         <div class="form-group">
                             <div class="form-row">
                               <div class="col-md-12">
-                                <label for="NomeCat">Categoria</label>
-                                <input class="form-control"  [(ngModel)]= "NomeCat" id="NomeCat" name="NomeCat" type="text" placeholder="Digite o nome da categoria" required>
+                                <label for="NomeArd">Categoria</label>
+                                <input class="form-control"  [(ngModel)]= "NomeArd" id="NomeArd" name="NomeArd" type="text" placeholder="Digite o nome da categoria" required>
                               </div>
                             </div>
                           </div>
                       <div class="form-group">
                         <div class="form-row">
                           <div class="col-md-12">
-                            <label for="categorias">Antiga Categoria</label>
+                            <label for="arduino">Antiga Categoria</label>
                               <div class="form-group">
-                                <select [(ngModel)]="IdCat" class="custom-select"  name="categorias">
-                                    <option *ngFor="let busca of categorias" [value]="busca.IdCat">{{busca.IdCat}} | {{busca.NomeCat}}</option>
+                                <select [(ngModel)]="IdLora" class="custom-select"  name="arduino">
+                                    <option *ngFor="let busca of arduinos" [value]="busca.IdLora">{{busca.IdLora}} | {{busca.NomeArd}}</option>
                                 </select>
                               </div>
                           </div>
                         </div>
                       </div>
-                      <a class="btn btn-primary btn-block" (click)="alterarCat(IdCat);">Alterar Categoria</a>
+                      <a class="btn btn-primary btn-block" (click)="alterarArd(IdLora);">Alterar Categoria</a>
                     </form>
                   </div>
                 </div>
@@ -186,7 +186,7 @@
 <!--Relatorios!-->
 <div class="container" *ngSwitchCase="'reportCat'">
     <div class="card card-register mx-auto mt-5">
-      <div class="card-header text-center">Relatorio de Categorias Cadastradas</div>
+      <div class="card-header text-center">Relatorio de arduino Cadastradas</div>
       <div class="card-body">
         <form>
           <div class="table-responsive">
@@ -198,9 +198,9 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let busca of categorias">
-                    <td> {{busca.IdCat}} </td>
-                    <td>{{busca.NomeCat}}</td>
+                  <tr *ngFor="let busca of arduinos">
+                    <td> {{busca.IdLora}} </td>
+                    <td>{{busca.NomeArd}}</td>
                   </tr>
                 </tbody>
                 </table>
@@ -227,7 +227,7 @@
                     <tr *ngFor="let busca of produtos">
                       <td>{{busca.IdProd}} </td>
                       <td>{{busca.NomeProd}}</td>
-                      <td>{{busca.IdCat}}</td>
+                      <td>{{busca.IdLora}}</td>
                     </tr>
                   </tbody>
                   </table>
@@ -242,19 +242,19 @@
         <div class="card-body">
             <div class="form-row">
                 <div class="col-md-12">
-                  <label for="categorias">Selecione o mes e o ano</label>
+                  <label for="arduino">Selecione o mes e o ano</label>
                     <div class="form-group">
-                      <select [(ngModel)]="IdCat" class="custom-select"  name="categorias">
-                          <option *ngFor="let busca of categorias" [value]="busca.IdCat">{{busca.IdCat}} | {{busca.NomeCat}}</option>
+                      <select [(ngModel)]="IdLora" class="custom-select"  name="arduino">
+                          <option *ngFor="let busca of arduinos" [value]="busca.IdLora">{{busca.IdLora}} | {{busca.NomeArd}}</option>
                       </select>
-                      <select [(ngModel)]="IdCat" class="custom-select"  name="categorias">
-                          <option *ngFor="let busca of categorias" [value]="busca.IdCat">{{busca.IdCat}} | {{busca.NomeCat}}</option>
+                      <select [(ngModel)]="IdLora" class="custom-select"  name="arduino">
+                          <option *ngFor="let busca of arduinos" [value]="busca.IdLora">{{busca.IdLora}} | {{busca.NomeArd}}</option>
                       </select>
 
                     </div>
                 </div>
               </div>
-              <a class="btn btn-primary btn-block" (click)="reportsProdCat(IdCat);">Gerar Relatorio</a>
+              <a class="btn btn-primary btn-block" (click)="reportsProdCat(IdLora);">Gerar Relatorio</a>
           <form>
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

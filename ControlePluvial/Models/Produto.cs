@@ -15,6 +15,6 @@ namespace ControlePluvial.Models
 
         [ForeignKey("Categoria")]
         public int IdCat { get; set; }
-        public virtual Categoria Categoria { get; set; }
+        public virtual Arduino Categoria { get; set; }
     }
 }

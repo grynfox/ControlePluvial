@@ -14,37 +14,37 @@ import { NgModel } from "@angular/forms";
 export class WebApiComponent implements OnInit {
   // tslint:disable-next-line:no-inferrable-types
   aba: string = "home";
-  NomeCat: string;
+  NomeArd: string;
   NomeProd: string;
-  IdCat: number;
+  IdLora: number;
   IdProd: number;
-  categorias: any[];
+  arduinos: any[];
   produtos: any[];
   show: boolean;
   relatorios: any[];
 
   constructor(private service: CadastroService) {
-    this.buscarCategoria();
+    this.buscarArduino();
     this.buscarProdutos();
 
   }
 
-  cadastrarCategoria() {
+  cadastrarArduino() {
     this.service
-      .cadastraCategoria(this.NomeCat)
+      .cadastraArduino(this.NomeArd)
       .subscribe(retorno => alert(retorno));
   }
   cadastrarProduto() {
     this.service
-      .cadastraProduto(this.NomeProd, this.IdCat)
+      .cadastraProduto(this.NomeProd, this.IdLora)
       .subscribe(retorno => alert(retorno));
   }
 
-  alterarCat() {
+  alterarArd() {
     this.service
-      .alteraCat(this.IdCat, this.NomeCat)
+      .alteraArd(this.IdLora, this.NomeArd)
       .subscribe(retorno => alert(retorno));
-      this.buscarCategoria();
+      this.buscarArduino();
   }
   alterarProd() {
     this.service
@@ -52,21 +52,21 @@ export class WebApiComponent implements OnInit {
       .subscribe(retorno => alert(retorno));
       this.buscarProdutos();
   }
-  buscarCategoria() {
+  buscarArduino() {
     this.service
-      .buscaCategoria(this.IdCat, this.NomeCat)
-      .subscribe(retorno => (this.categorias = retorno));
+      .buscaArduino(this.IdLora, this.NomeArd)
+      .subscribe(retorno => (this.arduinos = retorno));
   }
   buscarProdutos() {
     this.service
-      .buscaProduto(this.IdProd, this.NomeProd, this.IdCat)
+      .buscaProduto(this.IdProd, this.NomeProd, this.IdLora)
       .subscribe(retorno => (this.produtos = retorno));
   }
-  apagarCat() {
+  apagarArd() {
     this.service
-      .apagaCat(this.IdCat)
-      .subscribe(retorno => (this.categorias = retorno));
-      this.buscarCategoria();
+      .apagaArd(this.IdLora)
+      .subscribe(retorno => (this.arduinos = retorno));
+      this.buscarArduino();
   }
   apagarProd() {
     this.service.apagaProd(this.IdProd).subscribe(retorno => {
@@ -75,7 +75,7 @@ export class WebApiComponent implements OnInit {
     });
   }
   reportsProdCat() {
-    this.service.reportProdCat(this.IdProd, this.NomeProd, this.IdCat, this.NomeCat)
+    this.service.reportProdCat(this.IdProd, this.NomeProd, this.IdLora, this.NomeArd)
       .subscribe(retorno => (this.relatorios = retorno));
   }
   ngOnInit() {}

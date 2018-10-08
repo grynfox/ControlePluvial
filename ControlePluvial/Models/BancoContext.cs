@@ -22,7 +22,7 @@ namespace ControlePluvial.Models
 
         // public virtual DbSet<MyEntity> MyEntities { get; set; }
         public virtual DbSet<Produto>  Produto { get; set; }
-        public virtual DbSet<Categoria> Categoria { get; set; }
+        public virtual DbSet<Arduino> Arduino { get; set; }
         public virtual DbSet<Reports> Reports { get; set; }
     }
 

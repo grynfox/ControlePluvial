@@ -7,12 +7,12 @@ import { NgModel } from '@angular/forms';
           // tslint:disable:prefer-const
 @Injectable()
 export class CadastroService extends HttpHelper {
-  private _cadastraCategoria = 'Categoria/CadastraCategoria';
+  private _cadastraArduino = 'Arduino/CadastraArduino';
   private _cadastraProduto = 'Produto/CadastraProduto';
-  private _buscaCategoria = 'Categoria/GetCategoria';
+  private _buscaArduino = 'Arduino/GetArduino';
   private _buscaProdutos = 'Produto/GetProdutos';
-  private _delCat = 'Categoria/apagaCat';
-  private _altCat = 'Categoria/AlteraCat';
+  private _delArd = 'Arduino/apagaArd';
+  private _altArd = 'Arduino/AlteraArd';
   private _altProd = 'Produto/AlteraProd';
   private _delProd = 'Produto/ApagaProd';
   private _reportProdCat = 'Reports/GetProdCat';
@@ -20,20 +20,20 @@ export class CadastroService extends HttpHelper {
   constructor( http: Http) {
     super(http);
   }
-  cadastraCategoria(nomeCatParam: string) {
-    let result = this.postaction(this._cadastraCategoria, { NomeCat: nomeCatParam}).map(
+  cadastraArduino(NomeArdParam: string) {
+    let result = this.postaction(this._cadastraArduino, { NomeArd: NomeArdParam}).map(
       // tslint:disable-next-line:no-shadowed-variable
       result => {
 
-          let categoria = <any>result;
-          return categoria;
+          let arduino = <any>result;
+          return arduino;
       }
   ).catch(err => { return Observable.throw(err || 'Server error'); });
   return result;
   }
 
-  cadastraProduto(nomeProdParam: string, idCatParam: Number) {
-    let result = this.postaction(this._cadastraProduto, { NomeProd: nomeProdParam, IdCat: idCatParam}).map(
+  cadastraProduto(nomeProdParam: string, IdLoraParam: Number) {
+    let result = this.postaction(this._cadastraProduto, { NomeProd: nomeProdParam, IdLora: IdLoraParam}).map(
       // tslint:disable-next-line:no-shadowed-variable
       result => {
 
@@ -43,8 +43,8 @@ export class CadastroService extends HttpHelper {
   ).catch(err => { return Observable.throw(err || 'Server error'); });
   return result;
   }
-  alteraCat( idCatParam: Number, nomeCatParam: string) {
-    let result = this.putaction(this._altCat + `?idCat=${idCatParam}`, { NomeCat: nomeCatParam, }).map(
+  alteraArd( IdLoraParam: Number, NomeArdParam: string) {
+    let result = this.putaction(this._altArd + `?IdLora=${IdLoraParam}`, { NomeArd: NomeArdParam, }).map(
       // tslint:disable-next-line:no-shadowed-variable
       result => {
 
@@ -65,8 +65,8 @@ export class CadastroService extends HttpHelper {
   ).catch(err => { return Observable.throw(err || 'Server error'); });
   return result;
   }
-  buscaCategoria(idCatParam: Number, nomeCatParam: string ) {
-    let result = this.getaction(this._buscaCategoria, { NomeCat: nomeCatParam, IdCat: idCatParam}).map(
+  buscaArduino(IdLoraParam: Number, NomeArdParam: string ) {
+    let result = this.getaction(this._buscaArduino, { NomeArd: NomeArdParam, IdLora: IdLoraParam}).map(
       // tslint:disable-next-line:no-shadowed-variable
       result => {
 
@@ -76,9 +76,9 @@ export class CadastroService extends HttpHelper {
   ).catch(err => { return Observable.throw(err || 'Server error'); });
   return result;
   }
-  buscaProduto(idProdParam: number, nomeProdParam: string, idCatParam: number) {
+  buscaProduto(idProdParam: number, nomeProdParam: string, IdLoraParam: number) {
     let result = this.getaction(this._buscaProdutos,
-      { IdProd: idProdParam, NomeProd: nomeProdParam, IdCat: idCatParam}).map(
+      { IdProd: idProdParam, NomeProd: nomeProdParam, IdLora: IdLoraParam}).map(
       // tslint:disable-next-line:no-shadowed-variable
       result => {
 
@@ -89,8 +89,8 @@ export class CadastroService extends HttpHelper {
   return result;
   }
 
-  apagaCat(idCatParam: number ) {
-    let result = this.deleteaction(this._delCat, { IdCat: idCatParam }).map(
+  apagaArd(IdLoraParam: number ) {
+    let result = this.deleteaction(this._delArd, { IdLora: IdLoraParam }).map(
       // tslint:disable-next-line:no-shadowed-variable
       result => {
 
@@ -112,9 +112,9 @@ export class CadastroService extends HttpHelper {
   ).catch(err => { return Observable.throw(err || 'Server error'); });
   return result;
   }
-  reportProdCat(idProdParam: number, nomeProdParam: string, idCatParam: number, nomeCatParam: string) {
+  reportProdCat(idProdParam: number, nomeProdParam: string, IdLoraParam: number, NomeArdParam: string) {
     let result = this.getaction(this._reportProdCat,
-      { IdProd: idProdParam, NomeProd: nomeProdParam, IdCat: idCatParam, NomeCat: nomeCatParam}).map(
+      { IdProd: idProdParam, NomeProd: nomeProdParam, IdLora: IdLoraParam, NomeArd: NomeArdParam}).map(
       // tslint:disable-next-line:no-shadowed-variable
       result => {
 
