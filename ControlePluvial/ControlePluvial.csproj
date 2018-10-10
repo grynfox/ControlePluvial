@@ -361,13 +361,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201809111140409_FluxoPluvial.cs" />
-    <Compile Include="Migrations\201809111140409_FluxoPluvial.Designer.cs">
-      <DependentUpon>201809111140409_FluxoPluvial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201810010144326_FluxoPluvial1.cs" />
-    <Compile Include="Migrations\201810010144326_FluxoPluvial1.Designer.cs">
-      <DependentUpon>201810010144326_FluxoPluvial1.cs</DependentUpon>
+    <Compile Include="Migrations\201810082320097_FluxoPluvial.cs" />
+    <Compile Include="Migrations\201810082320097_FluxoPluvial.Designer.cs">
+      <DependentUpon>201810082320097_FluxoPluvial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BancoContext.cs" />
@@ -513,11 +509,8 @@
     <Folder Include="Views\Reports\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201809111140409_FluxoPluvial.resx">
-      <DependentUpon>201809111140409_FluxoPluvial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201810010144326_FluxoPluvial1.resx">
-      <DependentUpon>201810010144326_FluxoPluvial1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201810082320097_FluxoPluvial.resx">
+      <DependentUpon>201810082320097_FluxoPluvial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

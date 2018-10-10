@@ -8,13 +8,13 @@ namespace ControlePluvial.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.Categorias",
+                "dbo.Arduinoes",
                 c => new
                     {
-                        IdCat = c.Int(nullable: false, identity: true),
-                        NomeCat = c.String(),
+                        IdLora = c.Int(nullable: false, identity: true),
+                        NomeArd = c.String(),
                     })
-                .PrimaryKey(t => t.IdCat);
+                .PrimaryKey(t => t.IdLora);
             
             CreateTable(
                 "dbo.Produtoes",
@@ -25,7 +25,7 @@ namespace ControlePluvial.Migrations
                         IdCat = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.IdProd)
-                .ForeignKey("dbo.Categorias", t => t.IdCat, cascadeDelete: true)
+                .ForeignKey("dbo.Arduinoes", t => t.IdCat, cascadeDelete: true)
                 .Index(t => t.IdCat);
             
             CreateTable(
@@ -33,7 +33,8 @@ namespace ControlePluvial.Migrations
                 c => new
                     {
                         codFlux = c.Int(nullable: false, identity: true),
-                        data = c.DateTime(nullable: false),
+                        IdLora = c.Int(nullable: false),
+                        dataPulso = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.codFlux);
             
@@ -41,11 +42,11 @@ namespace ControlePluvial.Migrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.Produtoes", "IdCat", "dbo.Categorias");
+            DropForeignKey("dbo.Produtoes", "IdCat", "dbo.Arduinoes");
             DropIndex("dbo.Produtoes", new[] { "IdCat" });
             DropTable("dbo.Reports");
             DropTable("dbo.Produtoes");
-            DropTable("dbo.Categorias");
+            DropTable("dbo.Arduinoes");
         }
     }
 }

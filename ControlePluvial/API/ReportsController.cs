@@ -26,6 +26,11 @@ namespace ControlePluvial.API
             banco.Reports.Add(pulso);
             banco.SaveChanges();
         }
+        [System.Web.Http.HttpGet]
+        public List<Reports> GetReports()
+        {
+            return this.banco.Reports.ToList();
+        }
 
     }
        
