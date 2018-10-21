@@ -24,10 +24,8 @@ void loop() {
     StaticJsonBuffer<300> JSONbuffer;   //Declaring static JSON buffer
     JsonObject& JSONencoder = JSONbuffer.createObject(); 
  
-    JsonArray& values = JSONencoder.createNestedArray("values"); //JSON array
-    values.add("LogRecebimento"); //Add value to array
-    values.add(":");
-    values.add("LoRa01"); 
+    JsonArray& values = JSONencoder.createNestedArray("IdLora"); //JSON array
+    values.add("1"); 
     char JSONmessageBuffer[300];
     JSONencoder.prettyPrintTo(JSONmessageBuffer, sizeof(JSONmessageBuffer));
     Serial.println(JSONmessageBuffer);

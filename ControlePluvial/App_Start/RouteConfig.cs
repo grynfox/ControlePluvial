@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Web.Http;
+using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace ControlePluvial
@@ -11,7 +12,7 @@ namespace ControlePluvial
 
             routes.MapRoute(
                 name: "Default",
-                url: "API/{controller}/{action}",
+                url: "API/{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index"}
             );
             routes.MapRoute(
