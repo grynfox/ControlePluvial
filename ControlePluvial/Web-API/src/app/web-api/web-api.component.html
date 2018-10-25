@@ -1,4 +1,5 @@
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
+  <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -10,22 +11,141 @@
                 <a class="nav-link"  (click)="aba= 'reportProd'">Fluxo Diario</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" (click)="aba= 'reportFluxoMensal'">Fluxo Mensal</a>
+                <a class="nav-link" (click)="aba= 'graficos'">Graficos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" (click)="aba= 'reportCat'">Dispositivos</a>
+                <a class="nav-link" (click)="aba= 'dispositivos'">Dispositivos</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" (click)="aba= 'reportPulsos'">Pulsos</a>
           </li>
           </ul>
         </div>
+        <form class="form-inline my-2 my-lg-0">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="aba= 'sobreNos'">Sobre Nos</button>
+        </form>
     </nav>
-
-
+    </header>
 </body>
-
+<div class="content">
 <form [ngSwitch]="aba" >
+  <!--home !-->
+    <section *ngSwitchCase="'home'">
+        <div class="jumbotron">
+            <h4 class="display-4">Grafico do Mes atual</h4>
+            <google-chart [data]="lineChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
+            <a class="btn btn-primary btn-lg" href="#" role="button">Atualizar</a>
+          </div>
+          <div class="jumbotron">
+              <h4 class="display-4">Litros contados</h4>
+              <button type="button" class="btn btn-primary" (click)="aba= 'reportPulsos'">
+                  Lidos <span class="badge badge-light">{{ contagem }}</span>
+                </button>
+            </div>
+    </section>
+  <section *ngSwitchCase="'home'">
+    <div class="container">
+        <h3>Sobre Controle Pluvial e Reaproveitamento Hidrico</h3>
+        <div class="row">
+            <div class="col">
+                <h5>Importancia do Reaproveitamento de Agua</h5>
+                <p class="lead">A água tem tido protagonismo nas discussões ambientais em todo o mundo.
+                  O recurso, que até alguns anos era negligenciado por ser abundante na Terra, hoje é
+                  foco de inúmeras discussões já que seu uso descontrolado e os altos índices de poluição
+                  podem comprometer sua disponibilidade.</p>
+                <a class="btn btn-primary btn-lg" href="https://www.pensamentoverde.com.br/meio-ambiente/o-reaproveitamento-da-agua-e-sustentabilidade/" role="button">Ver Mais</a>
+              </div>
+          <div class="col">
+            <div class="accordion" id="accordionExample">
+              <div class="card">
+                <div class="card-header" id="headingOne">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                      aria-expanded="true" aria-controls="collapseOne">
+                      Dicas de uso do Sistema
+                    </button>
+                  </h5>
+                </div>
+
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                  <div class="card-body">
+                    Lembre-se de verificar constantemente a carga das baterias que alimentam os Arduinos,
+                    em caso de queda de energia elas os mantem ligados.
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header" id="headingTwo">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo"
+                      aria-expanded="false" aria-controls="collapseTwo">
+                      Verificações Diarias
+                    </button>
+                  </h5>
+                </div>
+                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                  <div class="card-body">
+                      Verificações Diarias
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header" id="headingThree">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree"
+                      aria-expanded="false" aria-controls="collapseThree">
+                      Uso
+                    </button>
+                  </h5>
+                </div>
+                <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordionExample">
+                  <div class="card-body">
+                    Uso Test
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section *ngSwitchCase="'graficos'">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h4 class="display-4">Grafico Mes Corrente</h4>
+                    <p class="lead">
+                      <google-chart [data]="lineChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
+                    </p>
+                    </div>
+               <div class="col">
+                  <h4 class="display-4">Grafico</h4>
+                  <div class="input-group input-daterange">
+                      <input type="text" class="form-control" value="2012-04-05">
+                      <div class="input-group-addon">to</div>
+                      <input type="text" class="form-control" value="2012-04-19">
+
+                  </div>
+                  <google-chart [data]="lineChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
+             </div>
+            </div>
+          </div>
+        </section>
+        <section *ngSwitchCase="'graficos'">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <h4 class="display-4">PieChart</h4>
+                          <google-chart [data]="lineChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
+                        </div>
+                   <div class="col">
+                      <h4 class="display-4">BarChart</h4>
+                      <google-chart [data]="barChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
+                 </div>
+                </div>
+              </div>
+            </section>
 
         <!--arduino !-->
         <div class="container" *ngSwitchCase="'cadastroCat'">
@@ -99,14 +219,11 @@
                 </div>
               </div>
 <!--Relatorios!-->
-<div class="container" *ngSwitchCase="'reportCat'">
+<section *ngSwitchCase="'dispositivos'">
+<div class="container" >
     <div class="card text-center">
         <div class="card-header">
-          <ul class="nav nav-tabs card-header-tabs">
-            <li class="nav-item">
               <a class="nav-link active">Dispositivos</a>
-            </li>
-          </ul>
         </div>
         <div class="card-body">
             <form>
@@ -130,14 +247,11 @@
         </div>
       </div>
   </div>
+</section>
   <div class="container" *ngSwitchCase="'reportPulsos'">
     <div class="card text-center">
         <div class="card-header">
-          <ul class="nav nav-tabs card-header-tabs">
-            <li class="nav-item">
               <a class="nav-link active">Pulsos</a>
-            </li>
-          </ul>
         </div>
         <div class="card-body">
             <form>
@@ -145,12 +259,16 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                       <thead>
                         <tr>
-                          <th scope="col">Litros Recebidos</th>
+                          <th scope="col">Cod Dispositivo</th>
+                          <th scope="col">Cod Contagem</th>
+                          <th scope="col">Data</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr *ngFor="let busca of contagem">
-                          <td> {{busca}} </td>
+                        <tr *ngFor="let busca of contagemDados">
+                          <td> {{busca.IdLora}} </td>
+                          <td> {{busca.codFlux}} </td>
+                          <td> {{busca.dataPulso}} </td>
                         </tr>
                       </tbody>
                       </table>
@@ -159,32 +277,15 @@
         </div>
       </div>
   </div>
-
-    <div class="container" *ngSwitchCase="'reportFluxoMensal'">
-
-      <div class="card card-register mx-auto mt-5">
-        <div class="card-header text-center">Relatorio Fluxo Mensal</div>
-        <div class="card-body">
-            <div class="table-responsive">
-             <button (click)="AtualizaGrafico()"> Atualizar </button>
-              <google-chart [data]="chartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
-            </div>
-            <div class="table-responsive">
-              <button (click)="AtualizaGrafico()"> Atualizar </button>
-               <google-chart [data]="chartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
-             </div>
-
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-12 menu-fixed" *ngSwitchCase="'home'">
+    <section *ngSwitchCase="'sobreNos'">
+    <div class="col-lg-12 menu-fixed">
       <div class="card text-center">
         <div class="card-header">
-          <i class="fa fa-bar-chart"></i> Sistema de Controle Pluvial Puc Minas - Poços de Caldas</div>
+          <i class="fa fa-bar-chart"></i> Sistema de Controle Pluvial Puc Minas Campus Poços de Caldas</div>
         <div class="card-body">
             <h5 class="card-title">Igor Alexandre Saraiva Silva e Claudio Faria</h5>
             <p class="card-text"> Com os avanços tecnologicos existentes na area de controle, economia
-            e automação de processos a Puc Minas de Poços de Caldas viu a necessidade de melhorar
+            e automação de processos a Puc Minas <i>Campus</i> Poços de Caldas viu a necessidade de melhorar
             seu controle pluvial, fazendo assim um sistema totalmente automatizado de controle. </p>
         </div>
         <div class="card-footer small text-muted">
@@ -193,5 +294,7 @@
         </div>
       </div>
     </div>
+  </section>
     </form>
+  </div>
 

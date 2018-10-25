@@ -5,7 +5,7 @@ import { Chart } from 'chart.js';
 // import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import "rxjs/add/operator/map";
 import { GraficosService } from './../graficos.service';
-import { Observable } from "rxjs";
+import { DateFormatter } from "ngx-bootstrap";
 
 
 @Component({
@@ -25,39 +25,58 @@ export class WebApiComponent implements OnInit {
   IdProd: number;
   arduinos: any[];
   produtos: any[];
+  contagemDados: any[];
   contagem: number;
+  codFlux: number;
+  dataPulso: Date;
   show: boolean;
   relatorios: any[];
   dataPulsoInicio: Date;
   dataPulsoFinal: Date;
   DadosCarregados = false;
-
-  chartData =  {
+  lineChartData =  {
     chartType: 'LineChart',
     dataTable: [
       ['Data', 'Consumo'],
-      ['2004',  1000],
-      ['2005',  1170],
-      ['2006',  660],
-      ['2007',  1030]
+      ['2004',  '1000'],
+      ['2005',  '1170'],
+      ['2006',  '660'],
+      ['2007',  '1030']
     ],
     options: {'title': 'Consumo de agua'},
   };
-
+  barChartData =  {
+    chartType: 'BarChart',
+    dataTable: [
+      ['Data', 'Consumo'],
+      ['2004',  '1000'],
+      ['2005',  '1170'],
+      ['2006',  '660'],
+      ['2007',  '1030']
+    ],
+    options: {'title': 'Consumo de agua'},
+  };
   constructor(private service: CadastroService) {
      this.buscarArduino();
      this.contagemPulso();
-     this.reportsMensal();
+     this.reportsMensalLineChart();
+     this.reportsMensalBarChart();
+     this.contagemGeral();
 
   }
   private newMethod() {
-    this.reportsMensal();
+    this.reportsMensalLineChart();
   }
 
   contagemPulso() {
     this.service
-      .contagem(this.contagem)
+      .contagem(this.IdLora, this.contagem)
       .subscribe(retorno => (this.contagem = retorno));
+  }
+  contagemGeral() {
+    this.service
+      .contagemGeral(this.IdLora, this.codFlux, this.dataPulso)
+      .subscribe(retorno => (this.contagemDados = retorno));
   }
   cadastrarArduino() {
     this.service
@@ -85,22 +104,30 @@ export class WebApiComponent implements OnInit {
       this.buscarArduino();
   }
 
-  reportsMensal() {
+  reportsMensalLineChart() {
     this.DadosCarregados = false;
-    //Observable.of(this.fake)
     this.service.reportMensal(this.dataPulsoInicio, this.dataPulsoFinal)
       .subscribe(retorno => {
-        this.chartData.dataTable = [['Data', 'Consumo'], ...this.processaResposta(retorno)];
+        this.lineChartData.dataTable = [['Data', 'Consumo'], ...this.processaResposta(retorno)];
         this.DadosCarregados = true;
-        console.log(this.chartData);
+        console.log(this.lineChartData);
       });
 
   }
+  reportsMensalBarChart() {
+    this.DadosCarregados = false;
+    this.service.reportMensal(this.dataPulsoInicio, this.dataPulsoFinal)
+      .subscribe(retorno => {
+        this.barChartData.dataTable = [['Data', 'Consumo'], ...this.processaResposta(retorno)];
+        this.DadosCarregados = true;
+        console.log(this.barChartData);
+      });
 
-  AtualizaGrafico(){
-    this.reportsMensal();
   }
-
+  AtualizaGrafico(){
+    this.reportsMensalLineChart();
+    this.reportsMensalBarChart();
+  }
   processaResposta(retorno: Array<{Name: string, Value: number}>){
     const retProcessado = new Array<any>();
 
@@ -118,40 +145,6 @@ export class WebApiComponent implements OnInit {
   }
 
 
-  fake = [
-      [
-          "1/10/2018",
-          25
-      ],
-      [
-          "10/10/2018",
-          3
-      ],
-      [
-          "12/10/2018",
-          13
-      ],
-      [
-          "2/10/2018",
-          16
-      ],
-      [
-          "5/10/2018",
-          19
-      ],
-      [
-          "7/10/2018",
-          13
-      ],
-      [
-          "8/10/2018",
-          13
-      ],
-      [
-          "9/10/2018",
-          9
-      ]
-  ];
   ngOnInit() {
 
 

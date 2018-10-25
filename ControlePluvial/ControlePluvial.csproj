@@ -14,7 +14,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ControlePluvial</RootNamespace>
     <AssemblyName>Controle Pluvial</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort />
@@ -128,26 +128,14 @@
   <ItemGroup>
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\Antlr3.Runtime.pdb" />
+    <Content Include="bin\Antlr3.Runtime.xml" />
     <Content Include="bin\Controle Pluvial.dll" />
     <Content Include="bin\Controle Pluvial.pdb" />
     <Content Include="bin\EntityFramework.dll" />
     <Content Include="bin\EntityFramework.SqlServer.dll" />
-    <Content Include="bin\EntityFramework.SqlServer.xml" />
-    <Content Include="bin\EntityFramework.xml" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
-    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
     <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
     <Content Include="bin\Newtonsoft.Json.dll" />
-    <Content Include="bin\Newtonsoft.Json.xml" />
-    <Content Include="bin\pt-br\System.Net.Http.Formatting.resources.dll" />
-    <Content Include="bin\pt-br\System.Web.Helpers.resources.dll" />
-    <Content Include="bin\pt-br\System.Web.Http.resources.dll" />
-    <Content Include="bin\pt-br\System.Web.Http.WebHost.resources.dll" />
-    <Content Include="bin\pt-br\System.Web.Mvc.resources.dll" />
-    <Content Include="bin\pt-br\System.Web.Razor.resources.dll" />
-    <Content Include="bin\pt-br\System.Web.Webpages.Deployment.resources.dll" />
-    <Content Include="bin\pt-br\System.Web.Webpages.Razor.resources.dll" />
-    <Content Include="bin\pt-br\System.Web.Webpages.resources.dll" />
     <Content Include="bin\Release\Publish\bin\Antlr3.Runtime.dll" />
     <Content Include="bin\Release\Publish\bin\Antlr3.Runtime.pdb" />
     <Content Include="bin\Release\Publish\bin\Controle Pluvial.dll" />
@@ -293,25 +281,15 @@
     <Content Include="bin\roslyn\vbc.exe" />
     <Content Include="bin\roslyn\VBCSCompiler.exe" />
     <Content Include="bin\System.Net.Http.Formatting.dll" />
-    <Content Include="bin\System.Net.Http.Formatting.xml" />
     <Content Include="bin\System.Web.Helpers.dll" />
-    <Content Include="bin\System.Web.Helpers.xml" />
     <Content Include="bin\System.Web.Http.dll" />
     <Content Include="bin\System.Web.Http.WebHost.dll" />
-    <Content Include="bin\System.Web.Http.WebHost.xml" />
-    <Content Include="bin\System.Web.Http.xml" />
     <Content Include="bin\System.Web.Mvc.dll" />
-    <Content Include="bin\System.Web.Mvc.xml" />
     <Content Include="bin\System.Web.Optimization.dll" />
-    <Content Include="bin\System.Web.Optimization.xml" />
     <Content Include="bin\System.Web.Razor.dll" />
-    <Content Include="bin\System.Web.Razor.xml" />
     <Content Include="bin\System.Web.Webpages.Deployment.dll" />
-    <Content Include="bin\System.Web.Webpages.Deployment.xml" />
     <Content Include="bin\System.Web.Webpages.dll" />
     <Content Include="bin\System.Web.Webpages.Razor.dll" />
-    <Content Include="bin\System.Web.Webpages.Razor.xml" />
-    <Content Include="bin\System.Web.Webpages.xml" />
     <Content Include="bin\WebGrease.dll" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\assets\logopuc.jpg" />
@@ -510,6 +488,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="bin\pt-br\" />
     <Folder Include="Views\Cadastro\" />
     <Folder Include="Views\Reports\" />
   </ItemGroup>

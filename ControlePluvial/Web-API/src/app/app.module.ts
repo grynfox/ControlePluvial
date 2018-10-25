@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { WebApiComponent } from './web-api/web-api.component';
 import { CollapseModule, BsDropdownModule } from 'ngx-bootstrap';
 import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
-import { GraficosService } from './graficos.service';
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 
 

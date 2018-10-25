@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
 export class HttpHelper {
-    private _base = "API/";
+    private _base = 'API/';
     constructor(private _http: Http) {
     }
 

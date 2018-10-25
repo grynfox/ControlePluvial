@@ -11,6 +11,7 @@ export class CadastroService extends HttpHelper {
   private _buscaArduino = 'Arduino/GetArduino';
   private _buscaProdutos = 'Produto/GetProdutos';
   private _contagem = 'Reports/GetContaPulso';
+  private _contagemGeral = 'Reports/GetReports';
   private _delArd = 'Arduino/apagaArd';
   private _altArd = 'Arduino/AlteraArd';
   private _altProd = 'Produto/AlteraProd';
@@ -80,8 +81,19 @@ export class CadastroService extends HttpHelper {
   ).catch(err => { return Observable.throw(err || 'Server error'); });
   return result;
   }
-  contagem(IdLoraParam: number) {
-    let result = this.getaction(this._contagem).map(
+  contagem(IdLoraParam: number, valorLido: number) {
+    let result = this.getaction(this._contagem, {IdLora: IdLoraParam}).map(
+      // tslint:disable-next-line:no-shadowed-variable
+      result => {
+
+          let busca = <any>result;
+          return busca;
+      }
+  ).catch(err => { return Observable.throw(err || 'Server error'); });
+  return result;
+  }
+  contagemGeral(IdLoraParam: number, codFluxParam: number, dataPulsoParam: Date) {
+    let result = this.getaction(this._contagemGeral, {IdLora: IdLoraParam }).map(
       // tslint:disable-next-line:no-shadowed-variable
       result => {
 

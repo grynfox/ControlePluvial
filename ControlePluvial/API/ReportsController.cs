@@ -48,7 +48,7 @@ namespace ControlePluvial.API
         }
 
         [System.Web.Http.Route("api/reports/getMes")]
-        public List<ControlePluvial.API.Single> GetMes([FromUri] DateTime? mesEAnoValue = null)
+        public List<ControlePluvial.API.Single> GetMes([FromUri] DateTime ? mesEAnoValue = null)
         {
             var mesEAno = mesEAnoValue ?? DateTime.Now;
             var graficoPulso = banco.Reports.Where(r =>
@@ -58,16 +58,7 @@ namespace ControlePluvial.API
             {
                 Name = grp.Key + "/" + mesEAno.Month + "/" + mesEAno.Year,
                 Value = grp.Count()
-            }).OrderBy(row => row.Name).ToList();
-
-            /*
-             [
-             { Name: 'lalala', valor'2'
-             
-            } 
-            ]
-             */
-
+            }).OrderBy(row => row.Name.ToString()).ToList();
             return graficoPulso;
         }
 

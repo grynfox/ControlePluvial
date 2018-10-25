@@ -154,6 +154,7 @@ let CadastroService = class CadastroService extends __WEBPACK_IMPORTED_MODULE_0_
         this._buscaArduino = 'Arduino/GetArduino';
         this._buscaProdutos = 'Produto/GetProdutos';
         this._contagem = 'Reports/GetContaPulso';
+        this._contagemGeral = 'Reports/GetReports';
         this._delArd = 'Arduino/apagaArd';
         this._altArd = 'Arduino/AlteraArd';
         this._altProd = 'Produto/AlteraProd';
@@ -206,8 +207,17 @@ let CadastroService = class CadastroService extends __WEBPACK_IMPORTED_MODULE_0_
         }).catch(err => { return __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__["a" /* Observable */].throw(err || 'Server error'); });
         return result;
     }
-    contagem(IdLoraParam) {
-        let result = this.getaction(this._contagem).map(
+    contagem(IdLoraParam, valorLido) {
+        let result = this.getaction(this._contagem, { IdLora: IdLoraParam }).map(
+        // tslint:disable-next-line:no-shadowed-variable
+            result => {
+            let busca = result;
+            return busca;
+        }).catch(err => { return __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__["a" /* Observable */].throw(err || 'Server error'); });
+        return result;
+    }
+    contagemGeral(IdLoraParam, codFluxParam, dataPulsoParam) {
+        let result = this.getaction(this._contagemGeral, { IdLora: IdLoraParam }).map(
         // tslint:disable-next-line:no-shadowed-variable
             result => {
             let busca = result;
@@ -274,7 +284,7 @@ CadastroService = __decorate([
 class HttpHelper {
     constructor(_http) {
         this._http = _http;
-        this._base = "API/";
+        this._base = 'API/';
     }
     get haserror() {
         return this.errormsg != null;
@@ -347,14 +357,14 @@ class HttpHelper {
 /***/ "./src/app/web-api/web-api.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ".menu-fixed{\r\n  top: 20px\r\n}\r\n\r\n"
+module.exports = ".menu-fixed{\r\n  top: 20px\r\n}\r\nhtml {\r\n  height: 100%;\r\n}\r\nbody {\r\n  min-height: 100%;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-orient: vertical;\r\n  -webkit-box-direction: normal;\r\n      -ms-flex-direction: column;\r\n          flex-direction: column;\r\n}\r\n.content {\r\n  -webkit-box-flex: 1;\r\n      -ms-flex: 1;\r\n          flex: 1;\r\n}\r\n"
 
 /***/ }),
 
 /***/ "./src/app/web-api/web-api.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<body class=\"fixed-nav sticky-footer bg-dark\" id=\"page-top\">\r\n  <nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\" id=\"mainNav\">\r\n      <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarTogglerDemo03\" aria-controls=\"navbarTogglerDemo03\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n          <span class=\"navbar-toggler-icon\"></span>\r\n        </button>\r\n      <a class=\"navbar-brand text-white bg-dark\" (click)=\"aba= 'home'\">Controle Pluvial</a>\r\n      <div class=\"collapse navbar-collapse\" id=\"navbarTogglerDemo03\">\r\n          <ul class=\"navbar-nav mr-auto mt-2 mt-lg-0\">\r\n            <li class=\"nav-item\">\r\n                <a class=\"nav-link\"  (click)=\"aba= 'reportProd'\">Fluxo Diario</a>\r\n            </li>\r\n            <li class=\"nav-item\">\r\n                <a class=\"nav-link\" (click)=\"aba= 'reportFluxoMensal'\">Fluxo Mensal</a>\r\n            </li>\r\n            <li class=\"nav-item\">\r\n                <a class=\"nav-link\" (click)=\"aba= 'reportCat'\">Dispositivos</a>\r\n            </li>\r\n            <li class=\"nav-item\">\r\n              <a class=\"nav-link\" (click)=\"aba= 'reportPulsos'\">Pulsos</a>\r\n          </li>\r\n          </ul>\r\n        </div>\r\n    </nav>\r\n\r\n\r\n</body>\r\n\r\n<form [ngSwitch]=\"aba\" >\r\n\r\n        <!--arduino !-->\r\n        <div class=\"container\" *ngSwitchCase=\"'cadastroCat'\">\r\n            <div class=\"card card-register mx-auto mt-5\">\r\n              <div class=\"card-header text-center\">Cadastra Categoria</div>\r\n              <div class=\"card-body\">\r\n                <form>\r\n                  <div class=\"form-group\">\r\n                    <div class=\"form-row\">\r\n                      <div class=\"col-md-12\">\r\n                        <label for=\"NomeArd\">Categoria</label>\r\n                        <input class=\"form-control\" id=\"NomeArd\" name=\"NomeArd\" type=\"text\" placeholder=\"Digite o nome da categoria\"[(ngModel)]=\"NomeArd\" required>\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                  <a class=\"btn btn-primary btn-block\" (click)=\"cadastrarArduino(NomeArd);\">Cadastrar Categoria</a>\r\n                </form>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"container\" *ngSwitchCase=\"'delCat'\">\r\n              <div class=\"card card-register mx-auto mt-5\">\r\n                <div class=\"card-header text-center\">Deleta Categoria</div>\r\n                <div class=\"card-body\">\r\n                  <form>\r\n                    <div class=\"form-group\">\r\n                      <div class=\"form-row\">\r\n                        <div class=\"col-md-12\">\r\n                          <label for=\"arduino\">Categoria</label>\r\n                            <div class=\"form-group\">\r\n                              <select [(ngModel)]=\"IdLora\" class=\"custom-select\"  name=\"arduino\">\r\n                                  <option *ngFor=\"let busca of arduinos\" [value]=\"busca.IdLora\">{{busca.IdLora}} | {{busca.NomeArd}}</option>\r\n                              </select>\r\n                            </div>\r\n                        </div>\r\n                      </div>\r\n                    </div>\r\n                    <a class=\"btn btn-primary btn-block\" (click)=\"apagarArd(IdLora);\">Deletar Categoria</a>\r\n                  </form>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <div class=\"container\" *ngSwitchCase=\"'altCat'\">\r\n                <div class=\"card card-register mx-auto mt-5\">\r\n                  <div class=\"card-header text-center\">Alterar Categoria</div>\r\n                  <div class=\"card-body\">\r\n                    <form>\r\n                        <div class=\"form-group\">\r\n                            <div class=\"form-row\">\r\n                              <div class=\"col-md-12\">\r\n                                <label for=\"NomeArd\">Categoria</label>\r\n                                <input class=\"form-control\"  [(ngModel)]= \"NomeArd\" id=\"NomeArd\" name=\"NomeArd\" type=\"text\" placeholder=\"Digite o nome da categoria\" required>\r\n                              </div>\r\n                            </div>\r\n                          </div>\r\n                      <div class=\"form-group\">\r\n                        <div class=\"form-row\">\r\n                          <div class=\"col-md-12\">\r\n                            <label for=\"arduino\">Antiga Categoria</label>\r\n                              <div class=\"form-group\">\r\n                                <select [(ngModel)]=\"IdLora\" class=\"custom-select\"  name=\"arduino\">\r\n                                    <option *ngFor=\"let busca of arduinos\" [value]=\"busca.IdLora\">{{busca.IdLora}} | {{busca.NomeArd}}</option>\r\n                                </select>\r\n                              </div>\r\n                          </div>\r\n                        </div>\r\n                      </div>\r\n                      <a class=\"btn btn-primary btn-block\" (click)=\"alterarArd(IdLora);\">Alterar Categoria</a>\r\n                    </form>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n<!--Relatorios!-->\r\n<div class=\"container\" *ngSwitchCase=\"'reportCat'\">\r\n    <div class=\"card text-center\">\r\n        <div class=\"card-header\">\r\n          <ul class=\"nav nav-tabs card-header-tabs\">\r\n            <li class=\"nav-item\">\r\n              <a class=\"nav-link active\">Dispositivos</a>\r\n            </li>\r\n          </ul>\r\n        </div>\r\n        <div class=\"card-body\">\r\n            <form>\r\n                <div class=\"table-responsive\">\r\n                    <table class=\"table table-bordered\" id=\"dataTable\" width=\"100%\" cellspacing=\"0\">\r\n                      <thead>\r\n                        <tr>\r\n                          <th scope=\"col\">Codigo Dipositivo</th>\r\n                          <th scope=\"col\">Dispositivo</th>\r\n                        </tr>\r\n                      </thead>\r\n                      <tbody>\r\n                        <tr *ngFor=\"let busca of arduinos\">\r\n                          <td> {{busca.IdLora}} </td>\r\n                          <td>{{busca.NomeArd}}</td>\r\n                        </tr>\r\n                      </tbody>\r\n                      </table>\r\n                      </div>\r\n              </form>\r\n        </div>\r\n      </div>\r\n  </div>\r\n  <div class=\"container\" *ngSwitchCase=\"'reportPulsos'\">\r\n    <div class=\"card text-center\">\r\n        <div class=\"card-header\">\r\n          <ul class=\"nav nav-tabs card-header-tabs\">\r\n            <li class=\"nav-item\">\r\n              <a class=\"nav-link active\">Pulsos</a>\r\n            </li>\r\n          </ul>\r\n        </div>\r\n        <div class=\"card-body\">\r\n            <form>\r\n                <div class=\"table-responsive\">\r\n                    <table class=\"table table-bordered\" id=\"dataTable\" width=\"100%\" cellspacing=\"0\">\r\n                      <thead>\r\n                        <tr>\r\n                          <th scope=\"col\">Litros Recebidos</th>\r\n                        </tr>\r\n                      </thead>\r\n                      <tbody>\r\n                        <tr *ngFor=\"let busca of contagem\">\r\n                          <td> {{busca}} </td>\r\n                        </tr>\r\n                      </tbody>\r\n                      </table>\r\n                      </div>\r\n              </form>\r\n        </div>\r\n      </div>\r\n  </div>\r\n\r\n    <div class=\"container\" *ngSwitchCase=\"'reportFluxoMensal'\">\r\n\r\n      <div class=\"card card-register mx-auto mt-5\">\r\n        <div class=\"card-header text-center\">Relatorio Fluxo Mensal</div>\r\n        <div class=\"card-body\">\r\n            <div class=\"table-responsive\">\r\n             <button (click)=\"AtualizaGrafico()\"> Atualizar </button>\r\n              <google-chart [data]=\"chartData\" *ngIf=\"DadosCarregados\"  (chartError)='error($event)'></google-chart>\r\n            </div>\r\n            <div class=\"table-responsive\">\r\n              <button (click)=\"AtualizaGrafico()\"> Atualizar </button>\r\n               <google-chart [data]=\"chartData\" *ngIf=\"DadosCarregados\"  (chartError)='error($event)'></google-chart>\r\n             </div>\r\n\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"col-lg-12 menu-fixed\" *ngSwitchCase=\"'home'\">\r\n      <div class=\"card text-center\">\r\n        <div class=\"card-header\">\r\n          <i class=\"fa fa-bar-chart\"></i> Sistema de Controle Pluvial Puc Minas - Poços de Caldas</div>\r\n        <div class=\"card-body\">\r\n            <h5 class=\"card-title\">Igor Alexandre Saraiva Silva e Claudio Faria</h5>\r\n            <p class=\"card-text\"> Com os avanços tecnologicos existentes na area de controle, economia\r\n            e automação de processos a Puc Minas de Poços de Caldas viu a necessidade de melhorar\r\n            seu controle pluvial, fazendo assim um sistema totalmente automatizado de controle. </p>\r\n        </div>\r\n        <div class=\"card-footer small text-muted\">\r\n          <a href=\"https://www.linkedin.com/in/igoralexandre/\" class=\"btn-outline-info\">Linkedin - Igor Saraiva</a>\r\n          <a href=\"https://www.linkedin.com/in/igoralexandre/\" class=\"btn-outline-info\">Linkedin - Claudio Faria</a>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    </form>\r\n\r\n"
+module.exports = "<body class=\"fixed-nav sticky-footer bg-dark\" id=\"page-top\">\r\n  <header>\r\n  <nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\" id=\"mainNav\">\r\n      <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarTogglerDemo03\" aria-controls=\"navbarTogglerDemo03\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n          <span class=\"navbar-toggler-icon\"></span>\r\n        </button>\r\n      <a class=\"navbar-brand text-white bg-dark\" (click)=\"aba= 'home'\">Controle Pluvial</a>\r\n      <div class=\"collapse navbar-collapse\" id=\"navbarTogglerDemo03\">\r\n          <ul class=\"navbar-nav mr-auto mt-2 mt-lg-0\">\r\n            <li class=\"nav-item\">\r\n                <a class=\"nav-link\"  (click)=\"aba= 'reportProd'\">Fluxo Diario</a>\r\n            </li>\r\n            <li class=\"nav-item\">\r\n                <a class=\"nav-link\" (click)=\"aba= 'graficos'\">Graficos</a>\r\n            </li>\r\n            <li class=\"nav-item\">\r\n                <a class=\"nav-link\" (click)=\"aba= 'dispositivos'\">Dispositivos</a>\r\n            </li>\r\n            <li class=\"nav-item\">\r\n              <a class=\"nav-link\" (click)=\"aba= 'reportPulsos'\">Pulsos</a>\r\n          </li>\r\n          </ul>\r\n        </div>\r\n        <form class=\"form-inline my-2 my-lg-0\">\r\n          <button class=\"btn btn-outline-success my-2 my-sm-0\" type=\"submit\" (click)=\"aba= 'sobreNos'\">Sobre Nos</button>\r\n        </form>\r\n    </nav>\r\n    </header>\r\n</body>\r\n<div class=\"content\">\r\n<form [ngSwitch]=\"aba\" >\r\n  <!--home !-->\r\n    <section *ngSwitchCase=\"'home'\">\r\n        <div class=\"jumbotron\">\r\n            <h4 class=\"display-4\">Grafico do Mes atual</h4>\r\n            <google-chart [data]=\"lineChartData\" *ngIf=\"DadosCarregados\"  (chartError)='error($event)'></google-chart>\r\n            <a class=\"btn btn-primary btn-lg\" href=\"#\" role=\"button\">Atualizar</a>\r\n          </div>\r\n          <div class=\"jumbotron\">\r\n              <h4 class=\"display-4\">Litros contados</h4>\r\n              <button type=\"button\" class=\"btn btn-primary\" (click)=\"aba= 'reportPulsos'\">\r\n                  Lidos <span class=\"badge badge-light\">{{ contagem }}</span>\r\n                </button>\r\n            </div>\r\n    </section>\r\n  <section *ngSwitchCase=\"'home'\">\r\n    <div class=\"container\">\r\n        <h3>Sobre Controle Pluvial e Reaproveitamento Hidrico</h3>\r\n        <div class=\"row\">\r\n            <div class=\"col\">\r\n                <h5>Importancia do Reaproveitamento de Agua</h5>\r\n                <p class=\"lead\">A água tem tido protagonismo nas discussões ambientais em todo o mundo.\r\n                  O recurso, que até alguns anos era negligenciado por ser abundante na Terra, hoje é\r\n                  foco de inúmeras discussões já que seu uso descontrolado e os altos índices de poluição\r\n                  podem comprometer sua disponibilidade.</p>\r\n                <a class=\"btn btn-primary btn-lg\" href=\"https://www.pensamentoverde.com.br/meio-ambiente/o-reaproveitamento-da-agua-e-sustentabilidade/\" role=\"button\">Ver Mais</a>\r\n              </div>\r\n          <div class=\"col\">\r\n            <div class=\"accordion\" id=\"accordionExample\">\r\n              <div class=\"card\">\r\n                <div class=\"card-header\" id=\"headingOne\">\r\n                  <h5 class=\"mb-0\">\r\n                    <button class=\"btn btn-link\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseOne\"\r\n                      aria-expanded=\"true\" aria-controls=\"collapseOne\">\r\n                      Dicas de uso do Sistema\r\n                    </button>\r\n                  </h5>\r\n                </div>\r\n\r\n                <div id=\"collapseOne\" class=\"collapse\" aria-labelledby=\"headingOne\" data-parent=\"#accordionExample\">\r\n                  <div class=\"card-body\">\r\n                    Lembre-se de verificar constantemente a carga das baterias que alimentam os Arduinos,\r\n                    em caso de queda de energia elas os mantem ligados.\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"card\">\r\n                <div class=\"card-header\" id=\"headingTwo\">\r\n                  <h5 class=\"mb-0\">\r\n                    <button class=\"btn btn-link collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseTwo\"\r\n                      aria-expanded=\"false\" aria-controls=\"collapseTwo\">\r\n                      Verificações Diarias\r\n                    </button>\r\n                  </h5>\r\n                </div>\r\n                <div id=\"collapseTwo\" class=\"collapse show\" aria-labelledby=\"headingTwo\" data-parent=\"#accordionExample\">\r\n                  <div class=\"card-body\">\r\n                      Verificações Diarias\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"card\">\r\n                <div class=\"card-header\" id=\"headingThree\">\r\n                  <h5 class=\"mb-0\">\r\n                    <button class=\"btn btn-link collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseThree\"\r\n                      aria-expanded=\"false\" aria-controls=\"collapseThree\">\r\n                      Uso\r\n                    </button>\r\n                  </h5>\r\n                </div>\r\n                <div id=\"collapseThree\" class=\"collapse show\" aria-labelledby=\"headingThree\" data-parent=\"#accordionExample\">\r\n                  <div class=\"card-body\">\r\n                    Uso Test\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </section>\r\n\r\n    <section *ngSwitchCase=\"'graficos'\">\r\n        <div class=\"container\">\r\n            <div class=\"row\">\r\n                <div class=\"col\">\r\n                    <h4 class=\"display-4\">Grafico Mes Corrente</h4>\r\n                    <p class=\"lead\">\r\n                      <google-chart [data]=\"lineChartData\" *ngIf=\"DadosCarregados\"  (chartError)='error($event)'></google-chart>\r\n                    </p>\r\n                    </div>\r\n               <div class=\"col\">\r\n                  <h4 class=\"display-4\">Grafico</h4>\r\n                  <div class=\"input-group input-daterange\">\r\n                      <input type=\"text\" class=\"form-control\" value=\"2012-04-05\">\r\n                      <div class=\"input-group-addon\">to</div>\r\n                      <input type=\"text\" class=\"form-control\" value=\"2012-04-19\">\r\n\r\n                  </div>\r\n                  <google-chart [data]=\"lineChartData\" *ngIf=\"DadosCarregados\"  (chartError)='error($event)'></google-chart>\r\n             </div>\r\n            </div>\r\n          </div>\r\n        </section>\r\n        <section *ngSwitchCase=\"'graficos'\">\r\n            <div class=\"container\">\r\n                <div class=\"row\">\r\n                    <div class=\"col\">\r\n                        <h4 class=\"display-4\">PieChart</h4>\r\n                          <google-chart [data]=\"lineChartData\" *ngIf=\"DadosCarregados\"  (chartError)='error($event)'></google-chart>\r\n                        </div>\r\n                   <div class=\"col\">\r\n                      <h4 class=\"display-4\">BarChart</h4>\r\n                      <google-chart [data]=\"barChartData\" *ngIf=\"DadosCarregados\"  (chartError)='error($event)'></google-chart>\r\n                 </div>\r\n                </div>\r\n              </div>\r\n            </section>\r\n\r\n        <!--arduino !-->\r\n        <div class=\"container\" *ngSwitchCase=\"'cadastroCat'\">\r\n            <div class=\"card card-register mx-auto mt-5\">\r\n              <div class=\"card-header text-center\">Cadastra Categoria</div>\r\n              <div class=\"card-body\">\r\n                <form>\r\n                  <div class=\"form-group\">\r\n                    <div class=\"form-row\">\r\n                      <div class=\"col-md-12\">\r\n                        <label for=\"NomeArd\">Categoria</label>\r\n                        <input class=\"form-control\" id=\"NomeArd\" name=\"NomeArd\" type=\"text\" placeholder=\"Digite o nome da categoria\"[(ngModel)]=\"NomeArd\" required>\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                  <a class=\"btn btn-primary btn-block\" (click)=\"cadastrarArduino(NomeArd);\">Cadastrar Categoria</a>\r\n                </form>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"container\" *ngSwitchCase=\"'delCat'\">\r\n              <div class=\"card card-register mx-auto mt-5\">\r\n                <div class=\"card-header text-center\">Deleta Categoria</div>\r\n                <div class=\"card-body\">\r\n                  <form>\r\n                    <div class=\"form-group\">\r\n                      <div class=\"form-row\">\r\n                        <div class=\"col-md-12\">\r\n                          <label for=\"arduino\">Categoria</label>\r\n                            <div class=\"form-group\">\r\n                              <select [(ngModel)]=\"IdLora\" class=\"custom-select\"  name=\"arduino\">\r\n                                  <option *ngFor=\"let busca of arduinos\" [value]=\"busca.IdLora\">{{busca.IdLora}} | {{busca.NomeArd}}</option>\r\n                              </select>\r\n                            </div>\r\n                        </div>\r\n                      </div>\r\n                    </div>\r\n                    <a class=\"btn btn-primary btn-block\" (click)=\"apagarArd(IdLora);\">Deletar Categoria</a>\r\n                  </form>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <div class=\"container\" *ngSwitchCase=\"'altCat'\">\r\n                <div class=\"card card-register mx-auto mt-5\">\r\n                  <div class=\"card-header text-center\">Alterar Categoria</div>\r\n                  <div class=\"card-body\">\r\n                    <form>\r\n                        <div class=\"form-group\">\r\n                            <div class=\"form-row\">\r\n                              <div class=\"col-md-12\">\r\n                                <label for=\"NomeArd\">Categoria</label>\r\n                                <input class=\"form-control\"  [(ngModel)]= \"NomeArd\" id=\"NomeArd\" name=\"NomeArd\" type=\"text\" placeholder=\"Digite o nome da categoria\" required>\r\n                              </div>\r\n                            </div>\r\n                          </div>\r\n                      <div class=\"form-group\">\r\n                        <div class=\"form-row\">\r\n                          <div class=\"col-md-12\">\r\n                            <label for=\"arduino\">Antiga Categoria</label>\r\n                              <div class=\"form-group\">\r\n                                <select [(ngModel)]=\"IdLora\" class=\"custom-select\"  name=\"arduino\">\r\n                                    <option *ngFor=\"let busca of arduinos\" [value]=\"busca.IdLora\">{{busca.IdLora}} | {{busca.NomeArd}}</option>\r\n                                </select>\r\n                              </div>\r\n                          </div>\r\n                        </div>\r\n                      </div>\r\n                      <a class=\"btn btn-primary btn-block\" (click)=\"alterarArd(IdLora);\">Alterar Categoria</a>\r\n                    </form>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n<!--Relatorios!-->\r\n<section *ngSwitchCase=\"'dispositivos'\">\r\n<div class=\"container\" >\r\n    <div class=\"card text-center\">\r\n        <div class=\"card-header\">\r\n              <a class=\"nav-link active\">Dispositivos</a>\r\n        </div>\r\n        <div class=\"card-body\">\r\n            <form>\r\n                <div class=\"table-responsive\">\r\n                    <table class=\"table table-bordered\" id=\"dataTable\" width=\"100%\" cellspacing=\"0\">\r\n                      <thead>\r\n                        <tr>\r\n                          <th scope=\"col\">Codigo Dipositivo</th>\r\n                          <th scope=\"col\">Dispositivo</th>\r\n                        </tr>\r\n                      </thead>\r\n                      <tbody>\r\n                        <tr *ngFor=\"let busca of arduinos\">\r\n                          <td> {{busca.IdLora}} </td>\r\n                          <td>{{busca.NomeArd}}</td>\r\n                        </tr>\r\n                      </tbody>\r\n                      </table>\r\n                      </div>\r\n              </form>\r\n        </div>\r\n      </div>\r\n  </div>\r\n</section>\r\n  <div class=\"container\" *ngSwitchCase=\"'reportPulsos'\">\r\n    <div class=\"card text-center\">\r\n        <div class=\"card-header\">\r\n              <a class=\"nav-link active\">Pulsos</a>\r\n        </div>\r\n        <div class=\"card-body\">\r\n            <form>\r\n                <div class=\"table-responsive\">\r\n                    <table class=\"table table-bordered\" id=\"dataTable\" width=\"100%\" cellspacing=\"0\">\r\n                      <thead>\r\n                        <tr>\r\n                          <th scope=\"col\">Cod Dispositivo</th>\r\n                          <th scope=\"col\">Cod Contagem</th>\r\n                          <th scope=\"col\">Data</th>\r\n                        </tr>\r\n                      </thead>\r\n                      <tbody>\r\n                        <tr *ngFor=\"let busca of contagemDados\">\r\n                          <td> {{busca.IdLora}} </td>\r\n                          <td> {{busca.codFlux}} </td>\r\n                          <td> {{busca.dataPulso}} </td>\r\n                        </tr>\r\n                      </tbody>\r\n                      </table>\r\n                      </div>\r\n              </form>\r\n        </div>\r\n      </div>\r\n  </div>\r\n    <section *ngSwitchCase=\"'sobreNos'\">\r\n    <div class=\"col-lg-12 menu-fixed\">\r\n      <div class=\"card text-center\">\r\n        <div class=\"card-header\">\r\n          <i class=\"fa fa-bar-chart\"></i> Sistema de Controle Pluvial Puc Minas Campus Poços de Caldas</div>\r\n        <div class=\"card-body\">\r\n            <h5 class=\"card-title\">Igor Alexandre Saraiva Silva e Claudio Faria</h5>\r\n            <p class=\"card-text\"> Com os avanços tecnologicos existentes na area de controle, economia\r\n            e automação de processos a Puc Minas <i>Campus</i> Poços de Caldas viu a necessidade de melhorar\r\n            seu controle pluvial, fazendo assim um sistema totalmente automatizado de controle. </p>\r\n        </div>\r\n        <div class=\"card-footer small text-muted\">\r\n          <a href=\"https://www.linkedin.com/in/igoralexandre/\" class=\"btn-outline-info\">Linkedin - Igor Saraiva</a>\r\n          <a href=\"https://www.linkedin.com/in/igoralexandre/\" class=\"btn-outline-info\">Linkedin - Claudio Faria</a>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </section>\r\n    </form>\r\n  </div>\r\n\r\n"
 
 /***/ }),
 
@@ -387,62 +397,46 @@ let WebApiComponent = class WebApiComponent {
         // tslint:disable-next-line:no-inferrable-types
         this.aba = "home";
         this.DadosCarregados = false;
-        this.chartData = {
+        this.lineChartData = {
             chartType: 'LineChart',
             dataTable: [
                 ['Data', 'Consumo'],
-                ['2004', 1000],
-                ['2005', 1170],
-                ['2006', 660],
-                ['2007', 1030]
+                ['2004', '1000'],
+                ['2005', '1170'],
+                ['2006', '660'],
+                ['2007', '1030']
             ],
             options: { 'title': 'Consumo de agua' },
         };
-        this.fake = [
-            [
-                "1/10/2018",
-                25
+        this.barChartData = {
+            chartType: 'BarChart',
+            dataTable: [
+                ['Data', 'Consumo'],
+                ['2004', '1000'],
+                ['2005', '1170'],
+                ['2006', '660'],
+                ['2007', '1030']
             ],
-            [
-                "10/10/2018",
-                3
-            ],
-            [
-                "12/10/2018",
-                13
-            ],
-            [
-                "2/10/2018",
-                16
-            ],
-            [
-                "5/10/2018",
-                19
-            ],
-            [
-                "7/10/2018",
-                13
-            ],
-            [
-                "8/10/2018",
-                13
-            ],
-            [
-                "9/10/2018",
-                9
-            ]
-        ];
+            options: { 'title': 'Consumo de agua' },
+        };
         this.buscarArduino();
         this.contagemPulso();
-        this.reportsMensal();
+        this.reportsMensalLineChart();
+        this.reportsMensalBarChart();
+        this.contagemGeral();
     }
     newMethod() {
-        this.reportsMensal();
+        this.reportsMensalLineChart();
     }
     contagemPulso() {
         this.service
-            .contagem(this.contagem)
+            .contagem(this.IdLora, this.contagem)
             .subscribe(retorno => (this.contagem = retorno));
+    }
+    contagemGeral() {
+        this.service
+            .contagemGeral(this.IdLora, this.codFlux, this.dataPulso)
+            .subscribe(retorno => (this.contagemDados = retorno));
     }
     cadastrarArduino() {
         this.service
@@ -466,18 +460,27 @@ let WebApiComponent = class WebApiComponent {
             .subscribe(retorno => (this.arduinos = retorno));
         this.buscarArduino();
     }
-    reportsMensal() {
+    reportsMensalLineChart() {
         this.DadosCarregados = false;
-        //Observable.of(this.fake)
         this.service.reportMensal(this.dataPulsoInicio, this.dataPulsoFinal)
             .subscribe(retorno => {
-            this.chartData.dataTable = [['Data', 'Consumo'], ...this.processaResposta(retorno)];
+            this.lineChartData.dataTable = [['Data', 'Consumo'], ...this.processaResposta(retorno)];
             this.DadosCarregados = true;
-            console.log(this.chartData);
+            console.log(this.lineChartData);
+        });
+    }
+    reportsMensalBarChart() {
+        this.DadosCarregados = false;
+        this.service.reportMensal(this.dataPulsoInicio, this.dataPulsoFinal)
+            .subscribe(retorno => {
+            this.barChartData.dataTable = [['Data', 'Consumo'], ...this.processaResposta(retorno)];
+            this.DadosCarregados = true;
+            console.log(this.barChartData);
         });
     }
     AtualizaGrafico() {
-        this.reportsMensal();
+        this.reportsMensalLineChart();
+        this.reportsMensalBarChart();
     }
     processaResposta(retorno) {
         const retProcessado = new Array();
