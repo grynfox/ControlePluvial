@@ -24,7 +24,6 @@ export class WebApiComponent implements OnInit {
   IdLora: number;
   IdProd: number;
   arduinos: any[];
-  produtos: any[];
   contagemDados: any[];
   contagem: number;
   codFlux: number;
@@ -56,16 +55,26 @@ export class WebApiComponent implements OnInit {
     ],
     options: {'title': 'Consumo de agua'},
   };
+  pieChartData =  {
+    chartType: 'PieChart',
+    dataTable: [
+      ['Data', 'Consumo'],
+      ['Work',     '11'],
+      ['Eat',      '2'],
+      ['Commute',  '2'],
+      ['Watch TV', '2'],
+      ['Sleep',    '7']
+    ],
+    options: {'title': 'Consumo'},
+  };
   constructor(private service: CadastroService) {
      this.buscarArduino();
      this.contagemPulso();
      this.reportsMensalLineChart();
      this.reportsMensalBarChart();
+     this.reportsMensalPieChart();
      this.contagemGeral();
 
-  }
-  private newMethod() {
-    this.reportsMensalLineChart();
   }
 
   contagemPulso() {
@@ -83,15 +92,12 @@ export class WebApiComponent implements OnInit {
       .cadastraArduino(this.NomeArd)
       .subscribe(retorno => alert(retorno));
   }
-
-
   alterarArd() {
     this.service
       .alteraArd(this.IdLora, this.NomeArd)
       .subscribe(retorno => alert(retorno));
       this.buscarArduino();
   }
-
   buscarArduino() {
     this.service
       .buscaArduino(this.IdLora, this.NomeArd)
@@ -114,6 +120,16 @@ export class WebApiComponent implements OnInit {
       });
 
   }
+  reportsMensalPieChart() {
+    this.DadosCarregados = false;
+    this.service.reportMensal(this.dataPulsoInicio, this.dataPulsoFinal)
+      .subscribe(retorno => {
+        this.pieChartData.dataTable = [['Data', 'Consumo'], ...this.processaResposta(retorno)];
+        this.DadosCarregados = true;
+        console.log(this.pieChartData);
+      });
+
+  }
   reportsMensalBarChart() {
     this.DadosCarregados = false;
     this.service.reportMensal(this.dataPulsoInicio, this.dataPulsoFinal)
@@ -127,6 +143,7 @@ export class WebApiComponent implements OnInit {
   AtualizaGrafico(){
     this.reportsMensalLineChart();
     this.reportsMensalBarChart();
+    this.reportsMensalPieChart();
   }
   processaResposta(retorno: Array<{Name: string, Value: number}>){
     const retProcessado = new Array<any>();

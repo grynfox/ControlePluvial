@@ -31,14 +31,14 @@ namespace ControlePluvial.API
         {
             return this.banco.Arduino.ToList();
         }
-        [System.Web.Http.HttpPut]
-        public IHttpActionResult AlteraCat(int IdLora, [FromBody] Arduino value) {
+        [System.Web.Http.Route("api/arduino/alteraard")]
+        public IHttpActionResult AlteraArd(int IdLora, [FromBody] Arduino value) {
             var altCat = banco.Arduino.Where(linha => linha.IdLora == IdLora).FirstOrDefault();
             altCat.NomeArd = value.NomeArd;
             banco.SaveChanges();
             return this.Ok("Alterado");
         }
-        [System.Web.Http.HttpDelete]
+        [System.Web.Http.Route("api/arduino/apagaard")]
         public IHttpActionResult ApagaArd(int IdLora)
         {
             var apagaArd = banco.Arduino.FirstOrDefault(linha => linha.IdLora == IdLora);

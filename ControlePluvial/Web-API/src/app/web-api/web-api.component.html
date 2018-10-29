@@ -1,3 +1,4 @@
+<html>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
@@ -8,17 +9,15 @@
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
-                <a class="nav-link"  (click)="aba= 'reportProd'">Fluxo Diario</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" (click)="aba= 'graficos'">Graficos</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" (click)="aba= 'dispositivos'">Dispositivos</a>
-            </li>
+
             <li class="nav-item">
               <a class="nav-link" (click)="aba= 'reportPulsos'">Pulsos</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="aba= 'dispositivos'">Dispositivos</a>
+        </li>
           </ul>
         </div>
         <form class="form-inline my-2 my-lg-0">
@@ -28,18 +27,52 @@
     </header>
 </body>
 <div class="content">
-<form [ngSwitch]="aba" >
+<form [ngSwitch]="aba" style="background-color: rgb(255, 255, 255); border-color: rgb(255, 255, 255);" >
   <!--home !-->
+  <section *ngSwitchCase="'home'">
+
+  </section>
     <section *ngSwitchCase="'home'">
         <div class="jumbotron">
-            <h4 class="display-4">Grafico do Mes atual</h4>
-            <google-chart [data]="lineChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
+            <h6 class="display-4">Grafico de Consumo</h6>
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+              <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+              </ol>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <google-chart [data]="lineChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
+                  <h6 class="display-4">Litros contados {{ contagem }}</h6>
+                </div>
+                <div class="carousel-item">
+                  <google-chart [data]="barChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
+                  <google-chart [data]="pieChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
+                </div>
+                <div class="carousel-item">
+                  <google-chart [data]="pieChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
+                </div>
+                <div class="carousel-item">
+                  <h6 class="display-4">Litros contados {{ contagem }}</h6>
+                </div>
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
             <a class="btn btn-primary btn-lg" href="#" role="button">Atualizar</a>
           </div>
           <div class="jumbotron">
-              <h4 class="display-4">Litros contados</h4>
+              <h4 class="display-4">Litros contados {{ contagem }}</h4>
               <button type="button" class="btn btn-primary" (click)="aba= 'reportPulsos'">
-                  Lidos <span class="badge badge-light">{{ contagem }}</span>
+                  Lidos
                 </button>
             </div>
     </section>
@@ -83,11 +116,6 @@
                     </button>
                   </h5>
                 </div>
-                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                  <div class="card-body">
-                      Verificações Diarias
-                  </div>
-                </div>
               </div>
               <div class="card">
                 <div class="card-header" id="headingThree">
@@ -98,18 +126,12 @@
                     </button>
                   </h5>
                 </div>
-                <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordionExample">
-                  <div class="card-body">
-                    Uso Test
-                  </div>
-                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-
     <section *ngSwitchCase="'graficos'">
         <div class="container">
             <div class="row">
@@ -125,7 +147,6 @@
                       <input type="text" class="form-control" value="2012-04-05">
                       <div class="input-group-addon">to</div>
                       <input type="text" class="form-control" value="2012-04-19">
-
                   </div>
                   <google-chart [data]="lineChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
              </div>
@@ -137,87 +158,17 @@
                 <div class="row">
                     <div class="col">
                         <h4 class="display-4">PieChart</h4>
-                          <google-chart [data]="lineChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
+                          <google-chart [data]="pieChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
                         </div>
                    <div class="col">
-                      <h4 class="display-4">BarChart</h4>
+                      <h4 class="display-4">Consumo em Barras</h4>
                       <google-chart [data]="barChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
                  </div>
                 </div>
               </div>
             </section>
 
-        <!--arduino !-->
-        <div class="container" *ngSwitchCase="'cadastroCat'">
-            <div class="card card-register mx-auto mt-5">
-              <div class="card-header text-center">Cadastra Categoria</div>
-              <div class="card-body">
-                <form>
-                  <div class="form-group">
-                    <div class="form-row">
-                      <div class="col-md-12">
-                        <label for="NomeArd">Categoria</label>
-                        <input class="form-control" id="NomeArd" name="NomeArd" type="text" placeholder="Digite o nome da categoria"[(ngModel)]="NomeArd" required>
-                      </div>
-                    </div>
-                  </div>
-                  <a class="btn btn-primary btn-block" (click)="cadastrarArduino(NomeArd);">Cadastrar Categoria</a>
-                </form>
-              </div>
-            </div>
-          </div>
-          <div class="container" *ngSwitchCase="'delCat'">
-              <div class="card card-register mx-auto mt-5">
-                <div class="card-header text-center">Deleta Categoria</div>
-                <div class="card-body">
-                  <form>
-                    <div class="form-group">
-                      <div class="form-row">
-                        <div class="col-md-12">
-                          <label for="arduino">Categoria</label>
-                            <div class="form-group">
-                              <select [(ngModel)]="IdLora" class="custom-select"  name="arduino">
-                                  <option *ngFor="let busca of arduinos" [value]="busca.IdLora">{{busca.IdLora}} | {{busca.NomeArd}}</option>
-                              </select>
-                            </div>
-                        </div>
-                      </div>
-                    </div>
-                    <a class="btn btn-primary btn-block" (click)="apagarArd(IdLora);">Deletar Categoria</a>
-                  </form>
-                </div>
-              </div>
-            </div>
-            <div class="container" *ngSwitchCase="'altCat'">
-                <div class="card card-register mx-auto mt-5">
-                  <div class="card-header text-center">Alterar Categoria</div>
-                  <div class="card-body">
-                    <form>
-                        <div class="form-group">
-                            <div class="form-row">
-                              <div class="col-md-12">
-                                <label for="NomeArd">Categoria</label>
-                                <input class="form-control"  [(ngModel)]= "NomeArd" id="NomeArd" name="NomeArd" type="text" placeholder="Digite o nome da categoria" required>
-                              </div>
-                            </div>
-                          </div>
-                      <div class="form-group">
-                        <div class="form-row">
-                          <div class="col-md-12">
-                            <label for="arduino">Antiga Categoria</label>
-                              <div class="form-group">
-                                <select [(ngModel)]="IdLora" class="custom-select"  name="arduino">
-                                    <option *ngFor="let busca of arduinos" [value]="busca.IdLora">{{busca.IdLora}} | {{busca.NomeArd}}</option>
-                                </select>
-                              </div>
-                          </div>
-                        </div>
-                      </div>
-                      <a class="btn btn-primary btn-block" (click)="alterarArd(IdLora);">Alterar Categoria</a>
-                    </form>
-                  </div>
-                </div>
-              </div>
+
 <!--Relatorios!-->
 <section *ngSwitchCase="'dispositivos'">
 <div class="container" >
@@ -248,6 +199,82 @@
       </div>
   </div>
 </section>
+<section *ngSwitchCase="'dispositivos'">
+  <div class="container">
+      <div class="row">
+          <div class="col">
+              <div class="card card-register mx-auto mt-5">
+                <div class="card-header text-center">Cadastro de Dispositivos</div>
+                <div class="card-body">
+                  <form>
+                    <div class="form-group">
+                      <div class="form-row">
+                        <div class="col-md-12">
+                          <label for="NomeArd">Dispositivo</label>
+                          <input class="form-control" id="NomeArd" name="NomeArd" type="text" placeholder="Digite o nome do dispositivo"[(ngModel)]="NomeArd" required>
+                        </div>
+                      </div>
+                    </div>
+                    <a class="btn btn-primary btn-block" (click)="cadastrarArduino(NomeArd);">Cadastrar</a>
+                  </form>
+                </div>
+              </div>
+          </div>
+        <div class="col">
+            <div class="card card-register mx-auto mt-5">
+              <div class="card-header text-center">Alterar Descrição do Dispositivo</div>
+              <div class="card-body">
+                <form>
+                    <div class="form-group">
+                        <div class="form-row">
+                          <div class="col-md-12">
+                            <label for="NomeArd">Dispositivo</label>
+                            <input class="form-control"  [(ngModel)]= "NomeArd" id="NomeArd" name="NomeArd" type="text" placeholder="Digite o novo nome do Dispositivo" required>
+                          </div>
+                        </div>
+                      </div>
+                  <div class="form-group">
+                    <div class="form-row">
+                      <div class="col-md-12">
+                        <label for="arduino">Dispositivos</label>
+                          <div class="form-group">
+                            <select [(ngModel)]="IdLora" class="custom-select"  name="arduino">
+                                <option *ngFor="let busca of arduinos" [value]="busca.IdLora">{{busca.IdLora}} | {{busca.NomeArd}}</option>
+                            </select>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                  <a class="btn btn-primary btn-block" (click)="alterarArd(IdLora);">Alterar Categoria</a>
+                </form>
+              </div>
+            </div>
+        </div>
+        <div class="col">
+                <div class="card card-register mx-auto mt-5">
+                  <div class="card-header text-center">Deletar Dispositivo</div>
+                  <div class="card-body">
+                    <form>
+                      <div class="form-group">
+                        <div class="form-row">
+                          <div class="col-md-12">
+                            <label for="arduino">Dispositivo</label>
+                              <div class="form-group">
+                                <select [(ngModel)]="IdLora" class="custom-select"  name="arduino">
+                                    <option *ngFor="let busca of arduinos" [value]="busca.IdLora">{{busca.IdLora}} | {{busca.NomeArd}}</option>
+                                </select>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                      <a class="btn btn-primary btn-block" (click)="apagarArd(IdLora);">Deletar Categoria</a>
+                    </form>
+                  </div>
+                </div>
+        </div>
+      </div>
+    </div>
+  </section>
   <div class="container" *ngSwitchCase="'reportPulsos'">
     <div class="card text-center">
         <div class="card-header">
@@ -295,6 +322,43 @@
       </div>
     </div>
   </section>
+  <section *ngSwitchCase="'sobreNos'">
+    <div class="container-fluid">
+      <div class="row">
+      <div class="col-12">
+      <div class="card card-inverse" style="background-color: rgb(255, 254, 254); border-color: #333;">
+      <div class="card-block">
+      <div class="row">
+      <div class="col-md-8 col-sm-8">
+      <h4 class="card-title">Sistema de Controle Pluvial e Reuso Hidrico</h4>
+      <p class="card-text"><strong>Idealizado: </strong> Igor Saraiva, Claudio Faria </p>
+      <p class="card-text">Com os avanços tecnologicos existentes na area de controle, economia
+        e automação de processos a Puc Minas <i>Campus</i> Poços de Caldas viu a necessidade de melhorar
+        seu controle pluvial, fazendo assim um sistema totalmente automatizado de controle. </p>
+      <p><strong>Tecnologias </strong>
+      <span class="badge bg-primary">ASP.NET</span>
+      <span class="badge bg-info">Angular</span>
+      <span class="badge bg-warning">Bootstrap</span>
+      <span class="badge bg-success">Entity Framework</span>
+      </p>
+      </div>
+      <div class="col-md-4 col-sm-4 text-center">
+      <img class="btn-md" src="../img/logopuc.jpg" alt="" style="border-radius:50%;">
+      </div>
+      <div class="col-md-4 col-sm-4 text-center">
+      <button class="btn btn-primary btn-block btn-md"><span class="fa fa-facebook-square"></span> Linkdin Igor Saraiva  </button>
+      </div>
+      <div class="col-md-4 col-sm-4 text-center">
+      <button class="btn btn-primary btn-block btn-md"><span class="fa fa-twitter-square"></span> Linkdin Claudio Faria </button>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+  </section>
     </form>
   </div>
 
+  </html>

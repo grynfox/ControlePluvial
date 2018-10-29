@@ -21,7 +21,6 @@ namespace ControlePluvial.Models
         // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
 
         // public virtual DbSet<MyEntity> MyEntities { get; set; }
-        public virtual DbSet<Produto>  Produto { get; set; }
         public virtual DbSet<Arduino> Arduino { get; set; }
         public virtual DbSet<Reports> Reports { get; set; }
     }

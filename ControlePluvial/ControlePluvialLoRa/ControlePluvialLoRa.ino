@@ -12,10 +12,10 @@ void setup() {
   u8x8.begin();
   u8x8.setFont(u8x8_font_chroma48medium8_r);
   WiFi.begin(ssid, password);   //WiFi connection
- 
+ u8x8.drawString(0, 0, ssid); 
   while (WiFi.status() != WL_CONNECTED) {  //Wait for the WiFI connection completion
- 
     delay(2000);
+    u8x8.clear();
     Serial.println("Waiting for connection");
  
   }
@@ -44,7 +44,7 @@ void Pulso (){
     u8x8.drawString(0, 0, JSONmessageBuffer); 
     HTTPClient http;    //Declare object of class HTTPClient
  
-    http.begin("http://10.0.0.8:80/API/Reports/PulsoHidrometro");      //Specify request destination
+    http.begin("http://192.168.43.10:80/API/Reports/PulsoHidrometro");      //Specify request destination
     http.addHeader("Content-Type", "application/json");  //Specify content-type header
     
     int httpCode = http.POST(JSONmessageBuffer);   //Send the request

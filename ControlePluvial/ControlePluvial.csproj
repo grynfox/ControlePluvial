@@ -1,4 +1,5 @@
-﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -31,11 +32,11 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\</OutputPath>
+    <OutputPath>wwwroot\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <FilesToIncludeForPublish>AllFilesInProjectFolder</FilesToIncludeForPublish>
+    <FilesToIncludeForPublish>AllFilesInTheProject</FilesToIncludeForPublish>
     <IncludeIisSettings>false</IncludeIisSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -127,8 +128,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Antlr3.Runtime.dll" />
-    <Content Include="bin\Antlr3.Runtime.pdb" />
-    <Content Include="bin\Antlr3.Runtime.xml" />
     <Content Include="bin\Controle Pluvial.dll" />
     <Content Include="bin\Controle Pluvial.pdb" />
     <Content Include="bin\EntityFramework.dll" />
@@ -136,111 +135,6 @@
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
     <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
     <Content Include="bin\Newtonsoft.Json.dll" />
-    <Content Include="bin\Release\Publish\bin\Antlr3.Runtime.dll" />
-    <Content Include="bin\Release\Publish\bin\Antlr3.Runtime.pdb" />
-    <Content Include="bin\Release\Publish\bin\Controle Pluvial.dll" />
-    <Content Include="bin\Release\Publish\bin\Controle Pluvial.pdb" />
-    <Content Include="bin\Release\Publish\bin\EntityFramework.dll" />
-    <Content Include="bin\Release\Publish\bin\EntityFramework.SqlServer.dll" />
-    <Content Include="bin\Release\Publish\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
-    <Content Include="bin\Release\Publish\bin\Microsoft.Web.Infrastructure.dll" />
-    <Content Include="bin\Release\Publish\bin\Newtonsoft.Json.dll" />
-    <Content Include="bin\Release\Publish\bin\pt-br\System.Net.Http.Formatting.resources.dll" />
-    <Content Include="bin\Release\Publish\bin\pt-br\System.Web.Helpers.resources.dll" />
-    <Content Include="bin\Release\Publish\bin\pt-br\System.Web.Http.resources.dll" />
-    <Content Include="bin\Release\Publish\bin\pt-br\System.Web.Http.WebHost.resources.dll" />
-    <Content Include="bin\Release\Publish\bin\pt-br\System.Web.Mvc.resources.dll" />
-    <Content Include="bin\Release\Publish\bin\pt-br\System.Web.Razor.resources.dll" />
-    <Content Include="bin\Release\Publish\bin\pt-br\System.Web.Webpages.Deployment.resources.dll" />
-    <Content Include="bin\Release\Publish\bin\pt-br\System.Web.Webpages.Razor.resources.dll" />
-    <Content Include="bin\Release\Publish\bin\pt-br\System.Web.Webpages.resources.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\csc.exe" />
-    <Content Include="bin\Release\Publish\bin\roslyn\csi.exe" />
-    <Content Include="bin\Release\Publish\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\Microsoft.CodeAnalysis.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\Microsoft.Win32.Primitives.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\System.AppContext.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\System.Collections.Immutable.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\System.Console.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\System.Diagnostics.FileVersionInfo.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\System.Diagnostics.Process.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\System.Diagnostics.StackTrace.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\System.IO.Compression.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\System.IO.FileSystem.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\System.IO.FileSystem.DriveInfo.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\System.IO.FileSystem.Primitives.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\System.IO.Pipes.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\System.Reflection.Metadata.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\System.Security.AccessControl.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\System.Security.Claims.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\System.Security.Cryptography.Algorithms.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\System.Security.Cryptography.Encoding.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\System.Security.Cryptography.Primitives.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\System.Security.Cryptography.X509Certificates.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\System.Security.Principal.Windows.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\System.Text.Encoding.CodePages.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\System.Threading.Thread.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\System.ValueTuple.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\System.Xml.ReaderWriter.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\System.Xml.XmlDocument.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\System.Xml.XPath.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\System.Xml.XPath.XDocument.dll" />
-    <Content Include="bin\Release\Publish\bin\roslyn\vbc.exe" />
-    <Content Include="bin\Release\Publish\bin\roslyn\VBCSCompiler.exe" />
-    <Content Include="bin\Release\Publish\bin\System.Net.Http.Formatting.dll" />
-    <Content Include="bin\Release\Publish\bin\System.Web.Helpers.dll" />
-    <Content Include="bin\Release\Publish\bin\System.Web.Http.dll" />
-    <Content Include="bin\Release\Publish\bin\System.Web.Http.WebHost.dll" />
-    <Content Include="bin\Release\Publish\bin\System.Web.Mvc.dll" />
-    <Content Include="bin\Release\Publish\bin\System.Web.Optimization.dll" />
-    <Content Include="bin\Release\Publish\bin\System.Web.Razor.dll" />
-    <Content Include="bin\Release\Publish\bin\System.Web.Webpages.Deployment.dll" />
-    <Content Include="bin\Release\Publish\bin\System.Web.Webpages.dll" />
-    <Content Include="bin\Release\Publish\bin\System.Web.Webpages.Razor.dll" />
-    <Content Include="bin\Release\Publish\bin\WebGrease.dll" />
-    <Content Include="bin\Release\Publish\Global.asax" />
-    <Content Include="bin\Release\Publish\Scripts\assets\logopuc.jpg" />
-    <Content Include="bin\Release\Publish\Scripts\favicon.ico" />
-    <Content Include="bin\Release\Publish\Scripts\index.html" />
-    <Content Include="bin\Release\Publish\Scripts\inline.bundle.js" />
-    <Content Include="bin\Release\Publish\Scripts\main.bundle.js" />
-    <Content Include="bin\Release\Publish\Scripts\polyfills.bundle.js" />
-    <Content Include="bin\Release\Publish\Scripts\scripts.bundle.js" />
-    <Content Include="bin\Release\Publish\Scripts\styles.bundle.js" />
-    <Content Include="bin\Release\Publish\Scripts\vendor.bundle.js" />
-    <Content Include="bin\Release\Publish\vendor\bootstrap\css\bootstrap-grid.css" />
-    <Content Include="bin\Release\Publish\vendor\bootstrap\css\bootstrap-grid.min.css" />
-    <Content Include="bin\Release\Publish\vendor\bootstrap\css\bootstrap-reboot.css" />
-    <Content Include="bin\Release\Publish\vendor\bootstrap\css\bootstrap-reboot.min.css" />
-    <Content Include="bin\Release\Publish\vendor\bootstrap\css\bootstrap.css" />
-    <Content Include="bin\Release\Publish\vendor\bootstrap\css\bootstrap.min.css" />
-    <Content Include="bin\Release\Publish\vendor\bootstrap\js\bootstrap.bundle.js" />
-    <Content Include="bin\Release\Publish\vendor\bootstrap\js\bootstrap.bundle.min.js" />
-    <Content Include="bin\Release\Publish\vendor\bootstrap\js\bootstrap.js" />
-    <Content Include="bin\Release\Publish\vendor\bootstrap\js\bootstrap.min.js" />
-    <Content Include="bin\Release\Publish\vendor\chart.js\Chart.bundle.js" />
-    <Content Include="bin\Release\Publish\vendor\chart.js\Chart.bundle.min.js" />
-    <Content Include="bin\Release\Publish\vendor\chart.js\Chart.js" />
-    <Content Include="bin\Release\Publish\vendor\chart.js\Chart.min.js" />
-    <Content Include="bin\Release\Publish\vendor\datatables\dataTables.bootstrap4.css" />
-    <Content Include="bin\Release\Publish\vendor\datatables\dataTables.bootstrap4.js" />
-    <Content Include="bin\Release\Publish\vendor\datatables\jquery.dataTables.js" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\css\font-awesome.css" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\css\font-awesome.min.css" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\fonts\fontawesome-webfont.svg" />
-    <Content Include="bin\Release\Publish\vendor\jquery-easing\jquery.easing.compatibility.js" />
-    <Content Include="bin\Release\Publish\vendor\jquery-easing\jquery.easing.js" />
-    <Content Include="bin\Release\Publish\vendor\jquery-easing\jquery.easing.min.js" />
-    <Content Include="bin\Release\Publish\vendor\jquery\jquery.js" />
-    <Content Include="bin\Release\Publish\vendor\jquery\jquery.min.js" />
-    <Content Include="bin\Release\Publish\vendor\jquery\jquery.slim.js" />
-    <Content Include="bin\Release\Publish\vendor\jquery\jquery.slim.min.js" />
     <Content Include="bin\roslyn\csc.exe" />
     <Content Include="bin\roslyn\csi.exe" />
     <Content Include="bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll" />
@@ -292,6 +186,7 @@
     <Content Include="bin\System.Web.Webpages.Razor.dll" />
     <Content Include="bin\WebGrease.dll" />
     <Content Include="Global.asax" />
+    <Content Include="obj\Debug\ControlePluvial.csproj.FileListAbsolute.txt" />
     <Content Include="Scripts\assets\logopuc.jpg" />
     <Content Include="Scripts\favicon.ico" />
     <Content Include="Scripts\index.html" />
@@ -334,7 +229,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\ArduinoController.cs" />
-    <Compile Include="API\ProdutoController.cs" />
     <Compile Include="API\ReportsController.cs" />
     <Compile Include="API\Single.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -348,77 +242,25 @@
     <Compile Include="Migrations\201810082320097_FluxoPluvial.Designer.cs">
       <DependentUpon>201810082320097_FluxoPluvial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810281822159_FluxoPluvial1.cs" />
+    <Compile Include="Migrations\201810281822159_FluxoPluvial1.Designer.cs">
+      <DependentUpon>201810281822159_FluxoPluvial1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BancoContext.cs" />
     <Compile Include="Models\Arduino.cs" />
-    <Compile Include="Models\Produto.cs" />
     <Compile Include="Models\Reports.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="obj\Release\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Release\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Release\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
-    <Content Include="ControlePluvialLoRa\ControlePluvialLoRa.ino" />
     <Content Include="bin\Controle Pluvial.dll.config" />
-    <Content Include="bin\Release\Publish\bin\roslyn\csc.exe.config" />
-    <Content Include="bin\Release\Publish\bin\roslyn\csc.rsp" />
-    <Content Include="bin\Release\Publish\bin\roslyn\csi.exe.config" />
-    <Content Include="bin\Release\Publish\bin\roslyn\csi.rsp" />
-    <Content Include="bin\Release\Publish\bin\roslyn\Microsoft.CSharp.Core.targets" />
-    <Content Include="bin\Release\Publish\bin\roslyn\Microsoft.VisualBasic.Core.targets" />
-    <Content Include="bin\Release\Publish\bin\roslyn\vbc.exe.config" />
-    <Content Include="bin\Release\Publish\bin\roslyn\vbc.rsp" />
-    <Content Include="bin\Release\Publish\bin\roslyn\VBCSCompiler.exe.config" />
-    <Content Include="bin\Release\Publish\Scripts\inline.bundle.js.map" />
-    <Content Include="bin\Release\Publish\Scripts\main.bundle.js.map" />
-    <Content Include="bin\Release\Publish\Scripts\polyfills.bundle.js.map" />
-    <Content Include="bin\Release\Publish\Scripts\scripts.bundle.js.map" />
-    <Content Include="bin\Release\Publish\Scripts\styles.bundle.js.map" />
-    <Content Include="bin\Release\Publish\Scripts\vendor.bundle.js.map" />
-    <Content Include="bin\Release\Publish\vendor\bootstrap\css\bootstrap.css.map" />
-    <Content Include="bin\Release\Publish\vendor\bootstrap\css\bootstrap.min.css.map" />
-    <Content Include="bin\Release\Publish\vendor\bootstrap\js\bootstrap.bundle.js.map" />
-    <Content Include="bin\Release\Publish\vendor\bootstrap\js\bootstrap.bundle.min.js.map" />
-    <Content Include="bin\Release\Publish\vendor\bootstrap\js\bootstrap.js.map" />
-    <Content Include="bin\Release\Publish\vendor\bootstrap\js\bootstrap.min.js.map" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\css\font-awesome.css.map" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\fonts\fontawesome-webfont.eot" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\fonts\fontawesome-webfont.ttf" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\fonts\fontawesome-webfont.woff" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\fonts\fontawesome-webfont.woff2" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\fonts\FontAwesome.otf" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\less\animated.less" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\less\bordered-pulled.less" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\less\core.less" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\less\fixed-width.less" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\less\font-awesome.less" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\less\icons.less" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\less\larger.less" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\less\list.less" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\less\mixins.less" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\less\path.less" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\less\rotated-flipped.less" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\less\screen-reader.less" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\less\stacked.less" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\less\variables.less" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\scss\font-awesome.scss" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\scss\_animated.scss" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\scss\_bordered-pulled.scss" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\scss\_core.scss" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\scss\_fixed-width.scss" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\scss\_icons.scss" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\scss\_larger.scss" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\scss\_list.scss" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\scss\_mixins.scss" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\scss\_path.scss" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\scss\_rotated-flipped.scss" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\scss\_screen-reader.scss" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\scss\_stacked.scss" />
-    <Content Include="bin\Release\Publish\vendor\font-awesome\scss\_variables.scss" />
-    <Content Include="bin\Release\Publish\vendor\jquery\jquery.min.map" />
-    <Content Include="bin\Release\Publish\vendor\jquery\jquery.slim.min.map" />
-    <Content Include="bin\Release\Publish\Views\View\Index.cshtml" />
-    <Content Include="bin\Release\Publish\Views\web.config" />
-    <Content Include="bin\Release\Publish\Web.config" />
     <Content Include="bin\roslyn\csc.exe.config" />
     <Content Include="bin\roslyn\csc.rsp" />
     <Content Include="bin\roslyn\csi.exe.config" />
@@ -428,6 +270,10 @@
     <Content Include="bin\roslyn\vbc.exe.config" />
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
+    <Content Include="obj\Debug\ControlePluvial.csproj.CoreCompileInputs.cache" />
+    <Content Include="obj\Debug\ControlePluvial.csprojAssemblyReference.cache" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="LoRa_v1\LoRa_v1.ino" />
     <None Include="packages.config" />
     <Content Include="Views\View\Index.cshtml" />
     <Content Include="Scripts\inline.bundle.js.map" />
@@ -489,6 +335,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="bin\pt-br\" />
+    <Folder Include="bin\Release\" />
+    <Folder Include="obj\Debug\TempPE\" />
     <Folder Include="Views\Cadastro\" />
     <Folder Include="Views\Reports\" />
   </ItemGroup>
@@ -496,10 +344,16 @@
     <EmbeddedResource Include="Migrations\201810082320097_FluxoPluvial.resx">
       <DependentUpon>201810082320097_FluxoPluvial.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810281822159_FluxoPluvial1.resx">
+      <DependentUpon>201810281822159_FluxoPluvial1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
