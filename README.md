@@ -6,7 +6,7 @@ Utilizado neste projeto
 * SQL Express 2017
 
 ##  Funcionamento do CRUD
-Para informações mais detalhadas verifique a [Wiki](https://github.com/grynfox/EasyCRUD/wiki)
+Para informações mais detalhadas verifique a [Wiki](https://github.com/grynfox/ControlePluvial/wiki)
 ### Dica: Verifique o caminho do BD antes de iniciar o projeto no arquivo web.config
 O campo connectionstring deve apontar para o caminho do SQL do servidor, o catalog deve ser substituido pelo nome do Banco ataxado no servidor e sugerrimos que use o usuario SA com a senha cadastrada durante o momento de configuração da instancia do SQL.
 ![Alt Text](https://i.imgur.com/JmpD5ji.jpg)
@@ -19,9 +19,9 @@ Home Page responsiva
 
 ![Alt Text](https://i.imgur.com/QlGb0rF.jpg)
 
-### Funcionalidade do menu de Product
+### Funcionalidade do menu Gráficos
 
-![Alt Text](https://i.imgur.com/t1sQQqC.jpg)
+![Alt Text](https://i.imgur.com/1UAey8v.jpg)
 
 Cadastro de Produtos vinculado entre tabelas Produto Categoria.
 
