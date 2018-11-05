@@ -12,6 +12,6 @@ namespace ControlePluvial.Models
         public int IdLora { get; set; }
         public string NomeArd { get; set; }
 
-       // public virtual IEnumerable<Produto> Produtos { get; set; }
+        public virtual IEnumerable<Reports> Reports { get; set; }
     }
 }

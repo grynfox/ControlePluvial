@@ -13,8 +13,11 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" (click)="aba= 'reportPulsos'">Pulsos</a>
+              <a class="nav-link" (click)="aba= 'reportPulsos'">Pulsos Geral</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="aba= 'reportPulsosDisp'">Pulsos por Disp</a>
+        </li>
           <li class="nav-item">
             <a class="nav-link" (click)="aba= 'dispositivos'">Dispositivos</a>
         </li>
@@ -275,7 +278,46 @@
       </div>
     </div>
   </section>
-  <div class="container" *ngSwitchCase="'reportPulsos'">
+  <section *ngSwitchCase="'reportPulsosDisp'">
+    <div class="card card-register mx-auto mt-5">
+      <div class="card-header text-center">Relatorio de Produtos Por Categoria</div>
+      <div class="card-body">
+          <div class="form-row">
+              <div class="col-md-12">
+                <label for="categorias">Selecione a Categoria</label>
+                  <div class="form-group">
+                    <select [(ngModel)]="IdLora" class="custom-select"  name="categorias">
+                        <option *ngFor="let busca of arduinos" [value]="busca.IdLora">{{busca.IdLora}} | {{busca.NomeArd}}</option>
+                    </select>
+                  </div>
+              </div>
+            </div>
+            <a class="btn btn-primary btn-block" (click)="reportsPulsosDisp(IdLora);">Gerar Relatorio</a>
+        <form>
+          <div class="table-responsive">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>Cod Dispositivo</th>
+                    <th>Cod Pulso</th>
+                    <th>Data</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let busca of relatorios">
+                    <td>{{busca.IdLora}} </td>
+                    <td>{{busca.codFlux}}</td>
+                    <td>{{busca.dataPulso}}</td>
+                  </tr>
+                </tbody>
+                </table>
+                </div>
+        </form>
+      </div>
+    </div>
+  </section>
+  <section *ngSwitchCase="'reportPulsos'">
+  <div class="container">
     <div class="card text-center">
         <div class="card-header">
               <a class="nav-link active">Pulsos</a>
@@ -304,6 +346,7 @@
         </div>
       </div>
   </div>
+</section>
     <section *ngSwitchCase="'sobreNos'">
     <div class="col-lg-12 menu-fixed">
       <div class="card text-center">

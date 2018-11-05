@@ -61,6 +61,13 @@ namespace ControlePluvial.API
             }).OrderBy(row => row.Name.ToString()).ToList();
             return graficoPulso;
         }
+        [System.Web.Http.Route("api/reports/getpulsoidlora")]
+        public IEnumerable<Reports> GetPulsoIdLora(int IdLora)
+        {
+            var tmp = this.banco.Reports.Where(linha => linha.Arduino.IdLora == IdLora).ToList();
+
+            return tmp;
+        }
 
     }
        

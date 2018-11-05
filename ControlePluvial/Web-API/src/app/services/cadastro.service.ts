@@ -14,7 +14,7 @@ export class CadastroService extends HttpHelper {
   private _delArd = 'Arduino/ApagaArd';
   private _altArd = 'Arduino/AlteraArd';
   private _reportMes = 'Reports/getMes';
-
+  private _reportPulsosDisp = 'Reports/GetPulsoIdLora';
   constructor( http: Http) {
     super(http);
   }
@@ -100,5 +100,16 @@ export class CadastroService extends HttpHelper {
   ).catch(err => { return Observable.throw(err || 'Server error'); });
   return result;
   }
+  reportPulsosDisp(codFluxParam: number, dataPulsoParam: Date, idLoraParam: number, nomeArdParam: string) {
+    let result = this.getaction(this._reportPulsosDisp,
+      { codFlux: codFluxParam, dataPulso: dataPulsoParam, IdLora: idLoraParam, NomeArd: nomeArdParam}).map(
+      // tslint:disable-next-line:no-shadowed-variable
+      result => {
 
+          let busca = <any>result;
+          return busca;
+      }
+  ).catch(err => { return Observable.throw(err || 'Server error'); });
+  return result;
+  }
 }

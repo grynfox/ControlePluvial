@@ -109,7 +109,10 @@ export class WebApiComponent implements OnInit {
       .subscribe(retorno => (this.arduinos = retorno));
       this.buscarArduino();
   }
-
+  reportsPulsosDisp() {
+    this.service.reportPulsosDisp(this.codFlux, this.dataPulso, this.IdLora, this.NomeArd)
+      .subscribe(retorno => (this.relatorios = retorno));
+  }
   reportsMensalLineChart() {
     this.DadosCarregados = false;
     this.service.reportMensal(this.dataPulsoInicio, this.dataPulsoFinal)
