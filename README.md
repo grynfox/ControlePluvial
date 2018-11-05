@@ -13,11 +13,11 @@ O campo connectionstring deve apontar para o caminho do SQL do servidor, o catal
 
 ### Abaixo seguem alguns exemplos de funções presentes no projeto.
 Home Page
-![Alt Text](https://i.imgur.com/beVBCiT.jpg)
+![Alt Text](https://i.imgur.com/4u3m8Kw.jpg)
 
 Home Page responsiva
 
-![Alt Text](https://i.imgur.com/c2BS3Ak.jpg)
+![Alt Text](https://i.imgur.com/QlGb0rF.jpg)
 
 ### Funcionalidade do menu de Product
 
