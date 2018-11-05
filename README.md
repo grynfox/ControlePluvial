@@ -8,6 +8,7 @@ Utilizado neste projeto
 ##  Funcionamento do CRUD
 Para informações mais detalhadas verifique a [Wiki](https://github.com/grynfox/EasyCRUD/wiki)
 ### Dica: Verifique o caminho do BD antes de iniciar o projeto no arquivo web.config
+O campo connectionstring deve apontar para o caminho do SQL do servidor, o catalog deve ser substituido pelo nome do Banco ataxado no servidor e sugerrimos que use o usuario SA com a senha cadastrada durante o momento de configuração da instancia do SQL.
 ![Alt Text](https://i.imgur.com/JmpD5ji.jpg)
 
 ### Abaixo seguem alguns exemplos de funções presentes no projeto.
