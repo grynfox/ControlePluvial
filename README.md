@@ -22,25 +22,21 @@ Home Page responsiva
 ### Funcionalidade do menu Gráficos
 
 ![Alt Text](https://i.imgur.com/1UAey8v.jpg)
-No menu de graficos é possivel, ver uma media mensal, ajustar um periodo a qual deseja montar o grafico, visualizar o percentual medio de consumo diario por meio do PieChart, e tambem para facilitar a visualização do usuario temos um gráfico no formato de barras.
 
-![Alt Text](https://i.imgur.com/3C1GCJa.jpg)
+No menu de graficos é possivel ver uma media mensal, ajustar um periodo a qual deseja montar o grafico, visualizar o percentual medio de consumo diario por meio do PieChart, e tambem para facilitar a visualização do usuario temos um gráfico no formato de barras.
 
-Alteração de cadastro de produtos.
 
-![Alt Text](https://i.imgur.com/Qin9FHa.jpg)
+### Funcionamento do menu Dispositivos
 
-Exclusão de Produtos.
+![Alt Text](https://i.imgur.com/Ka2gv5P.jpg)
 
-![Alt Text](https://i.imgur.com/YaSVmuH.jpg)
+No menu de dispositivos é diponibilizado ao usuario os dispositivos que se encontram ativos, alem de poder cadastrar um novo dispositivo, alterar o nome de um dispositivo existe ou excluir um que não é mais utilizado.
 
-### Funcionamento do menu Categoria mostrando suas funcionalidades e a responsividade
+### Funcionamento do menu Pulsos
 
-![Alt Text](https://i.imgur.com/ZeST6Xz.jpg)
+![Alt Text](https://i.imgur.com/YVbnR2K.jpg)
 
-### Relatorios mostramos dados providos de um simples get até mesmo dados vinculados com JOINs em tabelas.
-
-![Alt Text](https://i.imgur.com/g7Yuk1V.jpg)
+Para controle do usuario é apresentado os pulsos recebidos, a data que foi recebido e qual o codigo do dispositivo que enviou o pulso.
 
 Relatorio de todos os produtos encontrados no banco de dados.
 
