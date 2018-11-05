@@ -5,7 +5,7 @@ Utilizado neste projeto
 * Angular 5
 * SQL Express 2017
 
-##  Funcionamento do CRUD
+##  Funcionamento do Projeto
 Para informações mais detalhadas verifique a [Wiki](https://github.com/grynfox/ControlePluvial/wiki)
 ### Dica: Verifique o caminho do BD antes de iniciar o projeto no arquivo web.config
 O campo connectionstring deve apontar para o caminho do SQL do servidor, o catalog deve ser substituido pelo nome do Banco ataxado no servidor e sugerrimos que use o usuario SA com a senha cadastrada durante o momento de configuração da instancia do SQL.
@@ -22,8 +22,7 @@ Home Page responsiva
 ### Funcionalidade do menu Gráficos
 
 ![Alt Text](https://i.imgur.com/1UAey8v.jpg)
-
-Cadastro de Produtos vinculado entre tabelas Produto Categoria.
+No menu de graficos é possivel, ver uma media mensal, ajustar um periodo a qual deseja montar o grafico, visualizar o percentual medio de consumo diario por meio do PieChart, e tambem para facilitar a visualização do usuario temos um gráfico no formato de barras.
 
 ![Alt Text](https://i.imgur.com/3C1GCJa.jpg)
 
