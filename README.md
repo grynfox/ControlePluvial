@@ -38,18 +38,6 @@ No menu de dispositivos é diponibilizado ao usuario os dispositivos que se enco
 
 Para controle do usuario é apresentado os pulsos recebidos, a data que foi recebido e qual o codigo do dispositivo que enviou o pulso.
 
-Relatorio de todos os produtos encontrados no banco de dados.
-
-![Alt Text](https://i.imgur.com/tE60UOQ.jpg)
-
-Relatorio de categorias encontradas no banco de dados
-
-![Alt Text](https://i.imgur.com/ZRcD8ze.jpg)
-
-Relatorio de Produtos cadastrados tendo como meio de filtro por categoria usando um JOIN entre as tabelas produtos e categorias
-
-![Alt Text](https://i.imgur.com/O4gN1Dx.jpg)
-
 ### Tabelas da nossa DataBase.
 
-![Alt Text](https://i.imgur.com/NwRm5jn.jpg)
+![Alt Text](https://i.imgur.com/agKU2KJ.jpg)
