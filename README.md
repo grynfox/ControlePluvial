@@ -5,54 +5,39 @@ Utilizado neste projeto
 * Angular 5
 * SQL Express 2017
 
-##  Funcionamento do CRUD
-Para informações mais detalhadas verifique a [Wiki](https://github.com/grynfox/EasyCRUD/wiki)
+##  Funcionamento do Projeto
+Para informações mais detalhadas verifique a [Wiki](https://github.com/grynfox/ControlePluvial/wiki)
 ### Dica: Verifique o caminho do BD antes de iniciar o projeto no arquivo web.config
-![Alt Text](https://i.imgur.com/qiXpseC.jpg)
+O campo connectionstring deve apontar para o caminho do SQL do servidor, o catalog deve ser substituido pelo nome do Banco ataxado no servidor e sugerrimos que use o usuario SA com a senha cadastrada durante o momento de configuração da instancia do SQL.
+![Alt Text](https://i.imgur.com/JmpD5ji.jpg)
+
 ### Abaixo seguem alguns exemplos de funções presentes no projeto.
 Home Page
-![Alt Text](https://i.imgur.com/beVBCiT.jpg)
+![Alt Text](https://i.imgur.com/4u3m8Kw.jpg)
 
 Home Page responsiva
 
-![Alt Text](https://i.imgur.com/c2BS3Ak.jpg)
+![Alt Text](https://i.imgur.com/QlGb0rF.jpg)
 
-### Funcionalidade do menu de Product
+### Funcionalidade do menu Gráficos
 
-![Alt Text](https://i.imgur.com/t1sQQqC.jpg)
+![Alt Text](https://i.imgur.com/1UAey8v.jpg)
 
-Cadastro de Produtos vinculado entre tabelas Produto Categoria.
+No menu de graficos é possivel ver uma media mensal, ajustar um periodo a qual deseja montar o grafico, visualizar o percentual medio de consumo diario por meio do PieChart, e tambem para facilitar a visualização do usuario temos um gráfico no formato de barras.
 
-![Alt Text](https://i.imgur.com/3C1GCJa.jpg)
 
-Alteração de cadastro de produtos.
+### Funcionamento do menu Dispositivos
 
-![Alt Text](https://i.imgur.com/Qin9FHa.jpg)
+![Alt Text](https://i.imgur.com/Ka2gv5P.jpg)
 
-Exclusão de Produtos.
+No menu de dispositivos é diponibilizado ao usuario os dispositivos que se encontram ativos, alem de poder cadastrar um novo dispositivo, alterar o nome de um dispositivo existe ou excluir um que não é mais utilizado.
 
-![Alt Text](https://i.imgur.com/YaSVmuH.jpg)
+### Funcionamento do menu Pulsos
 
-### Funcionamento do menu Categoria mostrando suas funcionalidades e a responsividade
+![Alt Text](https://i.imgur.com/YVbnR2K.jpg)
 
-![Alt Text](https://i.imgur.com/ZeST6Xz.jpg)
-
-### Relatorios mostramos dados providos de um simples get até mesmo dados vinculados com JOINs em tabelas.
-
-![Alt Text](https://i.imgur.com/g7Yuk1V.jpg)
-
-Relatorio de todos os produtos encontrados no banco de dados.
-
-![Alt Text](https://i.imgur.com/tE60UOQ.jpg)
-
-Relatorio de categorias encontradas no banco de dados
-
-![Alt Text](https://i.imgur.com/ZRcD8ze.jpg)
-
-Relatorio de Produtos cadastrados tendo como meio de filtro por categoria usando um JOIN entre as tabelas produtos e categorias
-
-![Alt Text](https://i.imgur.com/O4gN1Dx.jpg)
+Para controle do usuario é apresentado os pulsos recebidos, a data que foi recebido e qual o codigo do dispositivo que enviou o pulso.
 
 ### Tabelas da nossa DataBase.
 
-![Alt Text](https://i.imgur.com/NwRm5jn.jpg)
+![Alt Text](https://i.imgur.com/agKU2KJ.jpg)
