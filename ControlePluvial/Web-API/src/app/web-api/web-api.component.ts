@@ -33,6 +33,8 @@ export class WebApiComponent implements OnInit {
   dataPulsoInicio: Date;
   dataPulsoFinal: Date;
   DadosCarregados = false;
+  DadosCarregadosData = false;
+  DadosCarregadosDisp = false;
   lineChartData =  {
     chartType: 'LineChart',
     dataTable: [
@@ -73,6 +75,7 @@ export class WebApiComponent implements OnInit {
      this.reportsMensalLineChart();
      this.reportsMensalBarChart();
      this.reportsMensalPieChart();
+     this.reportsMensalLineChartData();
      this.contagemGeral();
 
   }
@@ -123,12 +126,32 @@ export class WebApiComponent implements OnInit {
       });
 
   }
+  reportsMensalLineChartData() {
+    this.DadosCarregadosData = false;
+    this.service.reportMensal(this.dataPulsoInicio, this.dataPulsoFinal)
+      .subscribe(retorno => {
+        this.lineChartData.dataTable = [['Data', 'Consumo'], ...this.processaResposta(retorno)];
+        this.DadosCarregadosData = true;
+        console.log(this.lineChartData);
+      });
+
+  }
   reportsMensalPieChart() {
     this.DadosCarregados = false;
     this.service.reportMensal(this.dataPulsoInicio, this.dataPulsoFinal)
       .subscribe(retorno => {
         this.pieChartData.dataTable = [['Data', 'Consumo'], ...this.processaResposta(retorno)];
         this.DadosCarregados = true;
+        console.log(this.pieChartData);
+      });
+
+  }
+  reportsMensalPieChartDisp() {
+    this.DadosCarregadosDisp = false;
+    this.service.reportMensalDisp(this.IdLora, this.dataPulsoInicio, this.dataPulsoFinal)
+      .subscribe(retorno => {
+        this.pieChartData.dataTable = [['Data', 'Consumo'], ...this.processaResposta(retorno)];
+        this.DadosCarregadosDisp = true;
         console.log(this.pieChartData);
       });
 

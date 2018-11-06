@@ -1,4 +1,4 @@
-<html>
+<html lang="pt-br">
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
@@ -42,23 +42,18 @@
               <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
               </ol>
               <div class="carousel-inner">
                 <div class="carousel-item active">
                   <google-chart [data]="lineChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
-                  <h6 class="display-4">Litros contados {{ contagem }}</h6>
                 </div>
                 <div class="carousel-item">
                   <google-chart [data]="barChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
-                  <google-chart [data]="pieChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
-                </div>
-                <div class="carousel-item">
-                  <google-chart [data]="pieChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
-                </div>
-                <div class="carousel-item">
-                  <h6 class="display-4">Litros contados {{ contagem }}</h6>
+                  <div class="banner-transparente">
+                      <h1>Computação 2018</h1>
+                      <p>Formando pessoas com conhecimento para o mercado de trabalho</p>
+                      <button class="btn btn-danger btn-lg">Contate-nos agora</button>
+                    </div>
                 </div>
               </div>
               <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -70,7 +65,7 @@
                 <span class="sr-only">Next</span>
               </a>
             </div>
-            <a class="btn btn-primary btn-lg" href="#" role="button">Atualizar</a>
+            <a class="btn btn-primary btn-lg" (click)="AtualizaGrafico();" role="button">Atualizar</a>
           </div>
           <div class="jumbotron">
               <h4 class="display-4">Litros contados {{ contagem }}</h4>
@@ -147,11 +142,12 @@
                <div class="col">
                   <h4 class="display-4">Grafico</h4>
                   <div class="input-group input-daterange">
-                      <input type="text" class="form-control" value="2012-04-05">
+                      <input type="date" class="form-control" name = "dataPulsoInicio" [value]="dataPulsoInicio">
                       <div class="input-group-addon">to</div>
-                      <input type="text" class="form-control" value="2012-04-19">
+                      <input type="date" class="form-control" name= "dataPulsoFinal" [value]="dataPulsoFinal">
                   </div>
-                  <google-chart [data]="lineChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
+                  <a class="btn btn-primary btn-block" (click)="reportsMensalLineChartData(dataPulsoInicio, dataPulsoFinal);">Gerar Relatorio</a>
+                  <google-chart [data]="lineChartData" *ngIf="DadosCarregadosData"  (chartError)='error($event)'></google-chart>
              </div>
             </div>
           </div>
@@ -160,9 +156,15 @@
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <h4 class="display-4">PieChart</h4>
-                          <google-chart [data]="pieChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
+                        <h4 class="display-4">Percentual recebido por dia</h4>
+                        <div class="form-group">
+                          <select [(ngModel)]="IdLora" class="custom-select"  name="categorias">
+                              <option *ngFor="let busca of arduinos" [value]="busca.IdLora">{{busca.IdLora}} | {{busca.NomeArd}}</option>
+                          </select>
+                          <a class="btn btn-primary" (click)="reportsMensalPieChartDisp(IdLora);">Gerar Relatorio</a>
                         </div>
+                          <google-chart [data]="pieChartData" *ngIf="DadosCarregadosDisp"  (chartError)='error($event)'></google-chart>
+                    </div>
                    <div class="col">
                       <h4 class="display-4">Consumo em Barras</h4>
                       <google-chart [data]="barChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>

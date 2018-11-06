@@ -1,6 +1,7 @@
 ﻿using ControlePluvial.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -48,25 +49,57 @@ namespace ControlePluvial.API
         }
 
         [System.Web.Http.Route("api/reports/getMes")]
-        public List<ControlePluvial.API.Single> GetMes([FromUri] DateTime ? mesEAnoValue = null)
+        public List<Single> GetMes([FromUri] DateTime ? mesEAnoValue = null)
         {
             var mesEAno = mesEAnoValue ?? DateTime.Now;
-            var graficoPulso = banco.Reports.Where(r =>
-                r.dataPulso.Month == mesEAno.Month &&
-                r.dataPulso.Year == mesEAno.Year
-            ).GroupBy(r => r.dataPulso.Day).Select(grp => new ControlePluvial.API.Single
+            var graficoPulso = banco.Reports.Where(linha =>
+                linha.dataPulso.Month == mesEAno.Month &&
+                linha.dataPulso.Year == mesEAno.Year
+            ).GroupBy(linha => linha.dataPulso.Day).Select(grp => new ControlePluvial.API.Single
             {
                 Name = grp.Key + "/" + mesEAno.Month + "/" + mesEAno.Year,
                 Value = grp.Count()
             }).OrderBy(row => row.Name.ToString()).ToList();
             return graficoPulso;
         }
+
+
+        [System.Web.Http.Route("api/reports/getmesdata")]
+        public List<Single> GetMesData([FromUri] DateTime dataPulsoInicio, [FromUri] DateTime dataPulsoFinal)
+        {
+
+            var graficoPulso = banco.Reports.Where(linha =>
+                linha.dataPulso <= dataPulsoInicio &&
+                linha.dataPulso >= dataPulsoFinal
+            ).GroupBy(linha => linha.dataPulso.Day + "/" + linha.dataPulso.Month + "/" + linha.dataPulso.Year).Select(grp => new ControlePluvial.API.Single
+            {
+                Name = grp.Key,
+                Value = grp.Count()
+            }).OrderBy(row => row.Name.ToString()).ToList();
+            return graficoPulso;
+        }
+
         [System.Web.Http.Route("api/reports/getpulsoidlora")]
         public IEnumerable<Reports> GetPulsoIdLora(int IdLora)
         {
             var tmp = this.banco.Reports.Where(linha => linha.Arduino.IdLora == IdLora).ToList();
 
             return tmp;
+        }
+        [System.Web.Http.Route("api/reports/getmesdisp")]
+        public List<ControlePluvial.API.Single> GetMesDisp(int IdLora, [FromUri] DateTime? mesEAnoValue = null)
+        {
+            var mesEAno = mesEAnoValue ?? DateTime.Now;
+            var graficoPulso = banco.Reports.Where(linha =>
+                linha.IdLora == IdLora &&
+                linha.dataPulso.Month == mesEAno.Month &&
+                linha.dataPulso.Year == mesEAno.Year
+            ).GroupBy(linha => linha.dataPulso.Day).Select(grp => new ControlePluvial.API.Single
+            {
+                Name = grp.Key + "/" + mesEAno.Month + "/" + mesEAno.Year,
+                Value = grp.Count()
+            }).OrderBy(row => row.Name.ToString()).ToList();
+            return graficoPulso;
         }
 
     }
