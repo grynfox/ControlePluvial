@@ -14,6 +14,7 @@ export class CadastroService extends HttpHelper {
   private _delArd = 'Arduino/ApagaArd';
   private _altArd = 'Arduino/AlteraArd';
   private _reportMes = 'Reports/getMes';
+  private _reportMesData = 'Reports/getMesData';
   private _reportMesDisp = 'Reports/getMesDisp';
   private _reportPulsosDisp = 'Reports/GetPulsoIdLora';
   constructor( http: Http) {
@@ -91,6 +92,18 @@ export class CadastroService extends HttpHelper {
   }
   reportMensal(dataPulsoInicio: Date, dataPulsoFinal: Date) {
     let result = this.getaction(this._reportMes,
+      { dataPulsoInicio: dataPulsoInicio, dataPulsoFinal: dataPulsoFinal}).map(
+      // tslint:disable-next-line:no-shadowed-variable
+      result => {
+
+          let busca = <any>result;
+          return busca;
+      }
+  ).catch(err => { return Observable.throw(err || 'Server error'); });
+  return result;
+  }
+  reportMensalData(dataPulsoInicio: Date, dataPulsoFinal: Date) {
+    let result = this.getaction(this._reportMesData,
       { dataPulsoInicio: dataPulsoInicio, dataPulsoFinal: dataPulsoFinal}).map(
       // tslint:disable-next-line:no-shadowed-variable
       result => {

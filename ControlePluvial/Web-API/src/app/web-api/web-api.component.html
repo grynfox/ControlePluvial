@@ -1,6 +1,5 @@
 <html lang="pt-br">
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-  <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -9,25 +8,34 @@
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
-                <a class="nav-link" (click)="aba= 'graficos'">Graficos</a>
+                <a class="nav-link" (click)="aba= 'graficos'" target="_blank">
+                  <i class="fa fa-tasks"></i> Graficos</a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" (click)="aba= 'reportPulsos'">Pulsos Geral</a>
+                <div class="dropdown">
+                    <a class="nav-link dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-sort"></i> Pulsos</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" (click)="aba= 'reportPulsos'" >Geral</a>
+                            <a class="dropdown-item" (click)="aba= 'reportPulsosDisp'">Por Dispositivo</a>
+                </div>
+                </div>
+
           </li>
+
           <li class="nav-item">
-            <a class="nav-link" (click)="aba= 'reportPulsosDisp'">Pulsos por Disp</a>
-        </li>
-          <li class="nav-item">
-            <a class="nav-link" (click)="aba= 'dispositivos'">Dispositivos</a>
+            <a class="nav-link" (click)="aba= 'dispositivos'"  target="_blank">
+                <i class="fa fa-microchip"></i> Dispositivos</a>
         </li>
           </ul>
         </div>
         <form class="form-inline my-2 my-lg-0">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="aba= 'sobreNos'">Sobre Nos</button>
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="aba= 'sobreNos'">
+              Sobre Nós</button>
         </form>
+
     </nav>
-    </header>
 </body>
 <div class="content">
 <form [ngSwitch]="aba" style="background-color: rgb(255, 255, 255); border-color: rgb(255, 255, 255);" >
@@ -36,25 +44,27 @@
 
   </section>
     <section *ngSwitchCase="'home'">
-        <div class="jumbotron">
-            <h6 class="display-4">Grafico de Consumo</h6>
+
+            <h3>Gráfico de Consumo</h3>
+            <br><br>
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
               <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <!--<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>--><
               </ol>
               <div class="carousel-inner">
                 <div class="carousel-item active">
                   <google-chart [data]="lineChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
                 </div>
-                <div class="carousel-item">
-                  <google-chart [data]="barChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
+               <!-- <div class="carousel-item">
+                  <div class ="fundo-header">
                   <div class="banner-transparente">
-                      <h1>Computação 2018</h1>
-                      <p>Formando pessoas com conhecimento para o mercado de trabalho</p>
-                      <button class="btn btn-danger btn-lg">Contate-nos agora</button>
+                      <h1>Contabilizados {{contagem}} litros desde 01/01/2018</h1>
+                      <p></p>
+                      <button class="btn btn-danger btn-lg" *ngSwitchCase="'reportPulsos'">Registro de Pulsos</button>
                     </div>
-                </div>
+                    </div>
+                </div>-->
               </div>
               <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -65,20 +75,14 @@
                 <span class="sr-only">Next</span>
               </a>
             </div>
-            <a class="btn btn-primary btn-lg" (click)="AtualizaGrafico();" role="button">Atualizar</a>
-          </div>
-          <div class="jumbotron">
-              <h4 class="display-4">Litros contados {{ contagem }}</h4>
-              <button type="button" class="btn btn-primary" (click)="aba= 'reportPulsos'">
-                  Lidos
-                </button>
-            </div>
     </section>
   <section *ngSwitchCase="'home'">
     <div class="container">
-        <h3>Sobre Controle Pluvial e Reaproveitamento Hidrico</h3>
+        <br><br>
+      <h3>Sobre Controle Pluvial e Reaproveitamento Hídrico</h3>
         <div class="row">
             <div class="col">
+                <img class="img-responsive" src="https://i.imgur.com/1PWrFcb.jpg" href="" alt="">
                 <h5>Importancia do Reaproveitamento de Agua</h5>
                 <p class="lead">A água tem tido protagonismo nas discussões ambientais em todo o mundo.
                   O recurso, que até alguns anos era negligenciado por ser abundante na Terra, hoje é
@@ -93,15 +97,15 @@
                   <h5 class="mb-0">
                     <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
                       aria-expanded="true" aria-controls="collapseOne">
-                      Dicas de uso do Sistema
+                        Dicas de uso do Sistema
                     </button>
                   </h5>
                 </div>
 
                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                   <div class="card-body">
-                    Lembre-se de verificar constantemente a carga das baterias que alimentam os Arduinos,
-                    em caso de queda de energia elas os mantem ligados.
+                    Verificar os gráficos diariamente pode ser fundamental para identificar possíveis gastos desnecessários,
+                     ou vazamentos.
                   </div>
                 </div>
               </div>
@@ -114,37 +118,97 @@
                     </button>
                   </h5>
                 </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                  <div class="card-body">
+                    Lembre-se de verificar constantemente a carga das baterias que alimentam os Arduinos,
+                    em caso de queda de energia elas os mantem ligados.
+                  </div>
+                </div>
               </div>
               <div class="card">
                 <div class="card-header" id="headingThree">
                   <h5 class="mb-0">
                     <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree"
                       aria-expanded="false" aria-controls="collapseThree">
-                      Uso
+                      Atenção
                     </button>
                   </h5>
                 </div>
+                <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body">
+                      Certifique-se de que os ESP32 estão liberados pelo CRC.
+                    </div>
+                  </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <section *ngSwitchCase="'graficos'">
+    <section *ngSwitchCase="'home'">
         <div class="container">
+        <br><br>
+        <div class="row">
+          <div class="col">
+            <div class="card">
+              <img class="card-img-top" src="https://i.imgur.com/ydECzI4.jpg" alt="ESP32">
+              <div class="card-body">
+                <h5 class="card-title">ESP32 Lora</h5>
+                <p class="card-text">Para este projeto utilizamos o ESP32 da Heltec Automation. Para ver como se deve configura-lo clique no botao abaixo</p>
+                <a href="https://jquery.com/" target="blank" class="btn btn-primary">Clique Aqui</a>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <img class="card-img-top" src="https://i.imgur.com/BEbbRHW.png" alt="GirHub">
+              <div class="card-body">
+                <h5 class="card-title">GitHub</h5>
+                <p class="card-text">Este projeto esta no GitHub a maior plataforma de compartilhamento de código do mundo. Para acessar o projeto basta clicar no botão abaixo.</p>
+                <a href="https://github.com/grynfox/ControlePluvial" target="blank" class="btn btn-primary">Clique Aqui</a>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <img class="card-img-top" src="https://i.imgur.com/Bl67KSJ.jpg" alt="Hidrometro">
+              <div class="card-body">
+                <h5 class="card-title">Hidrometro</h5>
+                <p class="card-text">Saiba como os Hidrometros com leitura de pulso funcionam.</p>
+                <a href="https://www.w3schools.com/html/default.asp" target="blank" class="btn btn-primary">Clique Aqui</a>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <img class="card-img-top" src="https://i.imgur.com/uHu8Qzb.png" alt="Arduino">
+              <div class="card-body">
+                <h5 class="card-title">IoT Arduino</h5>
+                <p class="card-text">Utilize Arduinos em seus projetos. A técnologia que anda de mãos dadas com a Internet of Things</p>
+                <a href="https://circuitdigest.com/internet-of-things-iot-projects" target="blank" class="btn btn-primary">Clique Aqui</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </section>
+
+    <section *ngSwitchCase="'graficos'">
+      <p></p>
+      <div class="container">
             <div class="row">
                 <div class="col">
-                    <h4 class="display-4">Grafico Mes Corrente</h4>
+                    <h4>Gráfico Atual</h4>
                     <p class="lead">
                       <google-chart [data]="lineChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
                     </p>
                     </div>
                <div class="col">
-                  <h4 class="display-4">Grafico</h4>
+                  <h4>Por Período</h4>
                   <div class="input-group input-daterange">
-                      <input type="date" class="form-control" name = "dataPulsoInicio" [value]="dataPulsoInicio">
+                      <input type="date" [ngModel] ="dataPulsoInicio" [(value)]= "dataPulsoInicio"(ngModelChange)="dataPulsoInicio = $event"  >
                       <div class="input-group-addon">to</div>
-                      <input type="date" class="form-control" name= "dataPulsoFinal" [value]="dataPulsoFinal">
+                      <input type="date" [ngModel] ="dataPulsoFinal" [(value)]= "dataPulsoFinal" (ngModelChange)="dataPulsoFinal = $event" >
                   </div>
                   <a class="btn btn-primary btn-block" (click)="reportsMensalLineChartData(dataPulsoInicio, dataPulsoFinal);">Gerar Relatorio</a>
                   <google-chart [data]="lineChartData" *ngIf="DadosCarregadosData"  (chartError)='error($event)'></google-chart>
@@ -153,10 +217,11 @@
           </div>
         </section>
         <section *ngSwitchCase="'graficos'">
-            <div class="container">
+            <p></p>
+          <div class="container">
                 <div class="row">
                     <div class="col">
-                        <h4 class="display-4">Percentual recebido por dia</h4>
+                        <h4>Percentual recebido por dia</h4>
                         <div class="form-group">
                           <select [(ngModel)]="IdLora" class="custom-select"  name="categorias">
                               <option *ngFor="let busca of arduinos" [value]="busca.IdLora">{{busca.IdLora}} | {{busca.NomeArd}}</option>
@@ -166,7 +231,7 @@
                           <google-chart [data]="pieChartData" *ngIf="DadosCarregadosDisp"  (chartError)='error($event)'></google-chart>
                     </div>
                    <div class="col">
-                      <h4 class="display-4">Consumo em Barras</h4>
+                      <h4>Consumo em Barras</h4>
                       <google-chart [data]="barChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
                  </div>
                 </div>
@@ -349,7 +414,7 @@
       </div>
   </div>
 </section>
-    <section *ngSwitchCase="'sobreNos'">
+    <!--<section *ngSwitchCase="'sobreNos'">
     <div class="col-lg-12 menu-fixed">
       <div class="card text-center">
         <div class="card-header">
@@ -366,12 +431,12 @@
         </div>
       </div>
     </div>
-  </section>
+  </section>-->
   <section *ngSwitchCase="'sobreNos'">
     <div class="container-fluid">
       <div class="row">
       <div class="col-12">
-      <div class="card card-inverse" style="background-color: rgb(255, 254, 254); border-color: #333;">
+      <div class="card card-inverse" style="background-color: rgb(255, 254, 254); border-color: rgb(255, 255, 255);">
       <div class="card-block">
       <div class="row">
       <div class="col-md-8 col-sm-8">
@@ -388,13 +453,13 @@
       </p>
       </div>
       <div class="col-md-4 col-sm-4 text-center">
-      <img class="btn-md" src="../img/logopuc.jpg" alt="" style="border-radius:50%;">
+      <img class="btn-md" src="https://i.imgur.com/IeegpAv.jpg" alt="" style="border-radius:50%;">
       </div>
       <div class="col-md-4 col-sm-4 text-center">
-      <button class="btn btn-primary btn-block btn-md"><span class="fa fa-facebook-square"></span> Linkdin Igor Saraiva  </button>
+      <button class="btn btn-primary btn-block btn-md"><span class="fa fa-linkedin"></span> Linkedin Igor Saraiva  </button>
       </div>
       <div class="col-md-4 col-sm-4 text-center">
-      <button class="btn btn-primary btn-block btn-md"><span class="fa fa-twitter-square"></span> Linkdin Claudio Faria </button>
+      <button class="btn btn-primary btn-block btn-md"><span class="fa fa-linkedin"></span> Linkedin Claudio Faria </button>
       </div>
       </div>
       </div>

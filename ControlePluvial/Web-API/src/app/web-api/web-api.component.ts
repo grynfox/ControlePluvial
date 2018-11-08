@@ -4,8 +4,6 @@ import { Component, OnInit } from "@angular/core";
 import { Chart } from 'chart.js';
 // import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import "rxjs/add/operator/map";
-import { GraficosService } from './../graficos.service';
-import { DateFormatter } from "ngx-bootstrap";
 
 
 @Component({
@@ -128,7 +126,7 @@ export class WebApiComponent implements OnInit {
   }
   reportsMensalLineChartData() {
     this.DadosCarregadosData = false;
-    this.service.reportMensal(this.dataPulsoInicio, this.dataPulsoFinal)
+    this.service.reportMensalData(this.dataPulsoInicio, this.dataPulsoFinal)
       .subscribe(retorno => {
         this.lineChartData.dataTable = [['Data', 'Consumo'], ...this.processaResposta(retorno)];
         this.DadosCarregadosData = true;
