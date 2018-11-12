@@ -16,7 +16,7 @@ namespace ControlePluvial.API
         {
             this.banco = new BancoContext();
         }
-        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("API/Arduino/CadastraArduino")]
         public void CadastraArduino([FromBody] Arduino value)
         {
             Arduino lora = new Arduino();
@@ -26,19 +26,21 @@ namespace ControlePluvial.API
         }
 
 
-        [System.Web.Http.HttpGet]
+        [System.Web.Http.Route("API/Arduino/GetArduino")]
         public List<Arduino> GetArduino()
         {
             return this.banco.Arduino.ToList();
         }
-        [System.Web.Http.Route("api/arduino/alteraard")]
-        public IHttpActionResult AlteraArd(int IdLora, [FromBody] Arduino value) {
+        [System.Web.Http.Route("API/Arduino/AlteraArd")]
+        [System.Web.Http.HttpPut]
+        public IHttpActionResult AlteraArd([FromUri] int IdLora, [FromBody] Arduino value) {
             var altCat = banco.Arduino.Where(linha => linha.IdLora == IdLora).FirstOrDefault();
             altCat.NomeArd = value.NomeArd;
             banco.SaveChanges();
             return this.Ok("Alterado");
         }
         [System.Web.Http.Route("api/arduino/apagaard")]
+        [System.Web.Http.HttpDelete]
         public IHttpActionResult ApagaArd(int IdLora)
         {
             var apagaArd = banco.Arduino.FirstOrDefault(linha => linha.IdLora == IdLora);

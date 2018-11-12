@@ -8,8 +8,6 @@ import { WebApiComponent } from './web-api/web-api.component';
 import { CollapseModule, BsDropdownModule } from 'ngx-bootstrap';
 import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
 
 
 @NgModule({
@@ -21,7 +19,6 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
      CollapseModule.forRoot(), BsDropdownModule.forRoot(),
     // NgbModule.forRoot(),,
     Ng2GoogleChartsModule,
-    NgbModule,
     BrowserModule,
     FormsModule,
     HttpModule,

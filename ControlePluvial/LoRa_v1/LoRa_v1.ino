@@ -5,68 +5,66 @@
 U8X8_SSD1306_128X64_NONAME_SW_I2C u8x8(/* clock=*/ 15, /* data=*/ 4, /* reset=*/ 16);
 const char* ssid = "IT_NET";
 const char* password =  "dirtjump2018";
-IPAddress ip(10,0,0,8); //IP da rede
-IPAddress gateway(10,0,0,1);
-IPAddress subnet(255,255,255,0);
-int pin = 17;
+const char* linkServer = "http://10.0.0.3:80/API/Reports/PulsoHidrometro"; //caminho referente ao BD
+IPAddress ip(10, 0, 0, 8); //IP da rede
+IPAddress gateway(10, 0, 0, 1);
+IPAddress subnet(255, 255, 255, 0);
+int pin = 0; // Pino usado para leitura o sensor do hidrometro
+unsigned long readPulso;
 
 void setup() {
   pinMode(pin, INPUT);
   Serial.begin(115200);
   u8x8.begin();
   u8x8.setFont(u8x8_font_chroma48medium8_r);
-  delay(1000);   
- 
   WiFi.begin(ssid, password);
-  WiFi.config(ip,gateway,subnet); 
- 
+  //WiFi.config(ip, gateway, subnet);  //Habilita as configurações de Rede 
+
   while (WiFi.status() != WL_CONNECTED) { //Check for the connection
     delay(500);
-    Serial.println("Connecting..");
+    u8x8.clear();
+    u8x8.drawString(0, 1, "Conectando");
   }
   u8x8.drawString(0, 0,  ssid);
-  u8x8.drawString(0,1, "Conectado");  
-  Serial.print("IP: ");
-  Serial.println(WiFi.localIP());
+  u8x8.drawString(0, 1, "Conectado");
 }
- 
+
 void loop() {
- if(pulseIn(pin, HIGH)){
-  u8x8.clear();
-  Pulso();
-  digitalWrite(pin, LOW);
+     readPulso = pulseIn(pin, HIGH);
+  if (readPulso>0) {
+
+        Pulso();
+        u8x8.clear();
+        u8x8.drawString(0, 2, "Aguardando");
   }
 }
 
 void Pulso() {
-  if(WiFi.status()== WL_CONNECTED){   //Check WiFi connection status
- 
-   HTTPClient http;   
- 
-   http.begin("http://10.0.0.2:80/API/Reports/PulsoHidrometro");  //Specify destination for HTTP request
-   http.addHeader("Content-Type", "application/json");             //Specify content-type header
-   u8x8.drawString(0,2, "Pulso Enviado");
-   delay(100);
-   int httpResponseCode = http.POST("{""IdLora:""2}");   //Send the actual POST request
- 
-   if(httpResponseCode>0){
- 
-    Serial.println(httpResponseCode);   //Print return code
- 
-   }else{
- 
-    Serial.print("Error on sending request: ");
-    Serial.println(httpResponseCode);
- 
-   }
- 
-   http.end();  //Free resources
- 
- }else{
- 
-    Serial.println("Error in WiFi connection");   
- 
- }
- u8x8.clear();
- u8x8.drawString(0,2, "Aguardando");
+  if (WiFi.status() == WL_CONNECTED) { //Check WiFi connection status
+
+    HTTPClient http;
+    http.begin(linkServer);  //Specify destination for HTTP request
+    http.addHeader("Content-Type", "application/json");             //Define o tipo do Header a ser enviado
+    u8x8.drawString(0, 2, "Pulso Enviado"); 
+    u8x8.drawString(0, 3, "IdLora 01");
+    int httpResponseCode = http.POST("{""IdLora:""1}");   //Envia o campo do banco com o numero do modulo ESP32 
+
+    if (httpResponseCode > 0) {
+      
+      Serial.println(httpResponseCode); // Mostra o codigo com o retorno da requisição
+
+    } else {
+      u8x8.clear();
+      u8x8.drawString(0, 0, "Request Error");
+      Serial.println(httpResponseCode);
+    }
+
+    http.end();  //Free resources
+
+  } else {
+    u8x8.clear();
+    u8x8.drawString(0, 0, "Erro de");
+    u8x8.drawString(0, 1, "Conexao");
+
   }
+}

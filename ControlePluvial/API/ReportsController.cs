@@ -55,7 +55,7 @@ namespace ControlePluvial.API
             var graficoPulso = banco.Reports.Where(linha =>
                 linha.dataPulso.Month == mesEAno.Month &&
                 linha.dataPulso.Year == mesEAno.Year
-            ).GroupBy(linha => linha.dataPulso.Day).Select(grp => new ControlePluvial.API.Single
+            ).GroupBy(linha => linha.dataPulso.Day).Select(grp => new Single
             {
                 Name = grp.Key + "/" + mesEAno.Month + "/" + mesEAno.Year,
                 Value = grp.Count()
@@ -67,11 +67,11 @@ namespace ControlePluvial.API
         [System.Web.Http.Route("api/reports/getmesdata")]
         public List<Single> GetMesData([FromUri] DateTime dataPulsoInicio, [FromUri] DateTime dataPulsoFinal)
         {
-
+            
             var graficoPulso = banco.Reports.Where(linha =>
                 linha.dataPulso <= dataPulsoInicio &&
                 linha.dataPulso >= dataPulsoFinal
-            ).GroupBy(linha => linha.dataPulso.Day + "/" + linha.dataPulso.Month + "/" + linha.dataPulso.Year).Select(grp => new ControlePluvial.API.Single
+            ).GroupBy(linha => linha.dataPulso.Day + "/" + linha.dataPulso.Month + "/" + linha.dataPulso.Year).Select(grp => new Single
             {
                 Name = grp.Key,
                 Value = grp.Count()
@@ -87,14 +87,14 @@ namespace ControlePluvial.API
             return tmp;
         }
         [System.Web.Http.Route("api/reports/getmesdisp")]
-        public List<ControlePluvial.API.Single> GetMesDisp(int IdLora, [FromUri] DateTime? mesEAnoValue = null)
+        public List<Single> GetMesDisp(int IdLora, [FromUri] DateTime? mesEAnoValue = null)
         {
             var mesEAno = mesEAnoValue ?? DateTime.Now;
             var graficoPulso = banco.Reports.Where(linha =>
                 linha.IdLora == IdLora &&
                 linha.dataPulso.Month == mesEAno.Month &&
                 linha.dataPulso.Year == mesEAno.Year
-            ).GroupBy(linha => linha.dataPulso.Day).Select(grp => new ControlePluvial.API.Single
+            ).GroupBy(linha => linha.dataPulso.Day).Select(grp => new Single
             {
                 Name = grp.Key + "/" + mesEAno.Month + "/" + mesEAno.Year,
                 Value = grp.Count()

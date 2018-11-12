@@ -4,6 +4,7 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
+    <div class="container">
       <a class="navbar-brand text-white bg-dark" (click)="aba= 'home'">Controle Pluvial</a>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -31,10 +32,13 @@
           </ul>
         </div>
         <form class="form-inline my-2 my-lg-0">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="aba= 'sobreNos'">
-              Sobre Nós</button>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="aba= 'sobreNos'">
+                Sobre Nós</button>
+            <a class="nav-link" (click)="aba= 'config'" target="_blank">
+                    <i class="fa fa-cog" aria-hidden="true"></i></a>
         </form>
 
+      </div>
     </nav>
 </body>
 <div class="content">
@@ -43,51 +47,23 @@
   <section *ngSwitchCase="'home'">
 
   </section>
-    <section *ngSwitchCase="'home'">
-
-            <h3>Gráfico de Consumo</h3>
-            <br><br>
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-              <ol class="carousel-indicators">
-                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                <!--<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>--><
-              </ol>
-              <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <google-chart [data]="lineChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
-                </div>
-               <!-- <div class="carousel-item">
-                  <div class ="fundo-header">
-                  <div class="banner-transparente">
-                      <h1>Contabilizados {{contagem}} litros desde 01/01/2018</h1>
-                      <p></p>
-                      <button class="btn btn-danger btn-lg" *ngSwitchCase="'reportPulsos'">Registro de Pulsos</button>
-                    </div>
-                    </div>
-                </div>-->
-              </div>
-              <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-              </a>
-              <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-              </a>
-            </div>
-    </section>
   <section *ngSwitchCase="'home'">
     <div class="container">
+        <br>
+        <h3>Consumo Atual</h3>
+        <br>
+        <google-chart [data]="lineChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
         <br><br>
       <h3>Sobre Controle Pluvial e Reaproveitamento Hídrico</h3>
         <div class="row">
             <div class="col">
                 <img class="img-responsive" src="https://i.imgur.com/1PWrFcb.jpg" href="" alt="">
                 <h5>Importancia do Reaproveitamento de Agua</h5>
-                <p class="lead">A água tem tido protagonismo nas discussões ambientais em todo o mundo.
-                  O recurso, que até alguns anos era negligenciado por ser abundante na Terra, hoje é
-                  foco de inúmeras discussões já que seu uso descontrolado e os altos índices de poluição
-                  podem comprometer sua disponibilidade.</p>
+                <p class="lead">
+                  A água tem tido protagonismo nas discussões ambientais em todo o mundo.
+                  O recurso, que até alguns anos era negligenciado por ser abundante na Terra,
+                  hoje é foco de inúmeras discussões já que seu uso descontrolado e os altos
+                  índices de poluição podem comprometer sua disponibilidade.</p>
                 <a class="btn btn-primary btn-lg" href="https://www.pensamentoverde.com.br/meio-ambiente/o-reaproveitamento-da-agua-e-sustentabilidade/" role="button">Ver Mais</a>
               </div>
           <div class="col">
@@ -194,26 +170,26 @@
       </section>
 
     <section *ngSwitchCase="'graficos'">
-      <p></p>
-      <div class="container">
-            <div class="row">
+        <p></p>
+        <div class="container">
+              <div class="row">
+                  <div class="col">
+                      <h4>Gráfico Atual</h4>
+                      <p class="lead">
+                        <google-chart [data]="lineChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
+                      </p>
+                      </div>
                 <div class="col">
-                    <h4>Gráfico Atual</h4>
-                    <p class="lead">
-                      <google-chart [data]="lineChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
-                    </p>
+                    <h4>Por Período</h4>
+                    <div class="input-group">
+                        <input type="text" id="dataPulsoInicio" [ngModel] ="dataPulsoInicio" [(value)]= "dataPulsoInicio" (ngModelChange)="dataPulsoInicio = $event" />
+                        <div class="input-group-addon"> até </div>
+                        <input type="text" id="dataPulsoFinal" [ngModel] ="dataPulsoFinal" [(value)]= "dataPulsoFinal" (ngModelChange)="dataPulsoFinal = $event" />
                     </div>
-               <div class="col">
-                  <h4>Por Período</h4>
-                  <div class="input-group input-daterange">
-                      <input type="date" [ngModel] ="dataPulsoInicio" [(value)]= "dataPulsoInicio"(ngModelChange)="dataPulsoInicio = $event"  >
-                      <div class="input-group-addon">to</div>
-                      <input type="date" [ngModel] ="dataPulsoFinal" [(value)]= "dataPulsoFinal" (ngModelChange)="dataPulsoFinal = $event" >
-                  </div>
-                  <a class="btn btn-primary btn-block" (click)="reportsMensalLineChartData(dataPulsoInicio, dataPulsoFinal);">Gerar Relatorio</a>
-                  <google-chart [data]="lineChartData" *ngIf="DadosCarregadosData"  (chartError)='error($event)'></google-chart>
-             </div>
-            </div>
+                    <a class="btn btn-primary" (click)="reportsMensalLineChartData(dataPulsoInicio, dataPulsoFinal);">Gerar Relatorio</a>
+                    <google-chart [data]="lineChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
+              </div>
+              </div>
           </div>
         </section>
         <section *ngSwitchCase="'graficos'">
@@ -347,19 +323,19 @@
   </section>
   <section *ngSwitchCase="'reportPulsosDisp'">
     <div class="card card-register mx-auto mt-5">
-      <div class="card-header text-center">Relatorio de Produtos Por Categoria</div>
+      <div class="card-header text-center">Relatorio de Consumo Por Dispositivo</div>
       <div class="card-body">
           <div class="form-row">
               <div class="col-md-12">
-                <label for="categorias">Selecione a Categoria</label>
+                <label for="arduinos">Selecione o Dispositivo</label>
                   <div class="form-group">
-                    <select [(ngModel)]="IdLora" class="custom-select"  name="categorias">
+                    <select [(ngModel)]="IdLora" class="custom-select"  name="arduinos">
                         <option *ngFor="let busca of arduinos" [value]="busca.IdLora">{{busca.IdLora}} | {{busca.NomeArd}}</option>
                     </select>
                   </div>
               </div>
             </div>
-            <a class="btn btn-primary btn-block" (click)="reportsPulsosDisp(IdLora);">Gerar Relatorio</a>
+            <a class="btn btn-primary" (click)="reportsPulsosDisp(IdLora);">Gerar Relatorio</a>
         <form>
           <div class="table-responsive">
               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -433,17 +409,17 @@
     </div>
   </section>-->
   <section *ngSwitchCase="'sobreNos'">
-    <div class="container-fluid">
+    <div class="container">
       <div class="row">
       <div class="col-12">
       <div class="card card-inverse" style="background-color: rgb(255, 254, 254); border-color: rgb(255, 255, 255);">
-      <div class="card-block">
       <div class="row">
-      <div class="col-md-8 col-sm-8">
+      <div class="col">
+        <br>
       <h4 class="card-title">Sistema de Controle Pluvial e Reuso Hidrico</h4>
-      <p class="card-text"><strong>Idealizado: </strong> Igor Saraiva, Claudio Faria </p>
+      <p class="card-text"><strong>Idealizado: </strong> Claudio Faria, Igor Saraiva </p>
       <p class="card-text">Com os avanços tecnologicos existentes na area de controle, economia
-        e automação de processos a Puc Minas <i>Campus</i> Poços de Caldas viu a necessidade de melhorar
+        e automação de processos a Puc Minas <i>campus</i> Poços de Caldas viu a necessidade de melhorar
         seu controle pluvial, fazendo assim um sistema totalmente automatizado de controle. </p>
       <p><strong>Tecnologias </strong>
       <span class="badge bg-primary">ASP.NET</span>
@@ -451,16 +427,23 @@
       <span class="badge bg-warning">Bootstrap</span>
       <span class="badge bg-success">Entity Framework</span>
       </p>
+      <div class="row">
+        <div class="col text-center">
+            <img class="btn-md" src="https://i.imgur.com/1tA06lO.jpg" alt="" height="140" width="140" style="border-radius:40%;">
       </div>
-      <div class="col-md-4 col-sm-4 text-center">
-      <img class="btn-md" src="https://i.imgur.com/IeegpAv.jpg" alt="" style="border-radius:50%;">
+      <div class="col text-center">
+          <img class="btn-md" src="https://i.imgur.com/IeegpAv.jpg" alt="" height="140" width="140" style="border-radius:40%;">
+
       </div>
-      <div class="col-md-4 col-sm-4 text-center">
-      <button class="btn btn-primary btn-block btn-md"><span class="fa fa-linkedin"></span> Linkedin Igor Saraiva  </button>
-      </div>
-      <div class="col-md-4 col-sm-4 text-center">
-      <button class="btn btn-primary btn-block btn-md"><span class="fa fa-linkedin"></span> Linkedin Claudio Faria </button>
-      </div>
+    </div>
+        <div class="row">
+            <div class="col text-center">
+          <a href="https://www.linkedin.com/in/claudio-faria-60a76b143/" target="blank" class="btn btn-primary"><span class="fa fa-linkedin"></span> Claudio Faria</a>
+          </div>
+          <div class="col text-center">
+              <a href="https://www.linkedin.com/in/igoralexandre/" target="blank" class="btn btn-primary"><span class="fa fa-linkedin"></span> Igor Saraiva</a>
+          </div>
+         </div>
       </div>
       </div>
       </div>
