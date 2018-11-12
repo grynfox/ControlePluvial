@@ -182,9 +182,9 @@
                 <div class="col">
                     <h4>Por Período</h4>
                     <div class="input-group">
-                        <input type="text" id="dataPulsoInicio" [ngModel] ="dataPulsoInicio" [(value)]= "dataPulsoInicio" (ngModelChange)="dataPulsoInicio = $event" />
+                        <input type="date" id="dataPulsoInicio" [ngModel] ="dataPulsoInicio" [(value)]= "dataPulsoInicio" (ngModelChange)="dataPulsoInicio = $event" />
                         <div class="input-group-addon"> até </div>
-                        <input type="text" id="dataPulsoFinal" [ngModel] ="dataPulsoFinal" [(value)]= "dataPulsoFinal" (ngModelChange)="dataPulsoFinal = $event" />
+                        <input type="date" id="dataPulsoFinal" [ngModel] ="dataPulsoFinal" [(value)]= "dataPulsoFinal" (ngModelChange)="dataPulsoFinal = $event" />
                     </div>
                     <a class="btn btn-primary" (click)="reportsMensalLineChartData(dataPulsoInicio, dataPulsoFinal);">Gerar Relatorio</a>
                     <google-chart [data]="lineChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
@@ -213,7 +213,13 @@
                 </div>
               </div>
             </section>
+<section *ngSwitchCase="'config'">
+  <div class="container">
+      <br>
+  <a class="btn btn-primary" (click)="AtualizaGrafico();">Atualizar Graficos</a>
+  </div>
 
+</section>
 
 <!--Relatorios!-->
 <section *ngSwitchCase="'dispositivos'">

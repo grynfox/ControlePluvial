@@ -167,7 +167,6 @@ export class WebApiComponent implements OnInit {
   AtualizaGrafico(){
     this.reportsMensalLineChart();
     this.reportsMensalBarChart();
-    this.reportsMensalPieChart();
   }
   processaResposta(retorno: Array<{Name: string, Value: number}>){
     const retProcessado = new Array<any>();
