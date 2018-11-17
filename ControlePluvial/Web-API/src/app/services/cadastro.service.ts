@@ -9,14 +9,18 @@ import { NgModel } from '@angular/forms';
 export class CadastroService extends HttpHelper {
   private _cadastraArduino = 'Arduino/CadastraArduino';
   private _buscaArduino = 'Arduino/GetArduino';
+  private _buscaData = 'Reports/GetHora';
   private _contagem = 'Reports/GetContaPulso';
   private _contagemGeral = 'Reports/GetReports';
   private _delArd = 'Arduino/ApagaArd';
   private _altArd = 'Arduino/AlteraArd';
   private _reportMes = 'Reports/getMes';
+  private _reportMonth = 'Reports/getMesMonth';
   private _reportMesData = 'Reports/getMesData';
   private _reportMesDisp = 'Reports/getMesDisp';
   private _reportPulsosDisp = 'Reports/GetPulsoIdLora';
+  private _reportHoraTotal = 'Reports/GetHoraDiaTotal';
+  private _reportHoraDisp = 'Reports/GetHoraDiaDisp';
   constructor( http: Http) {
     super(http);
   }
@@ -56,6 +60,19 @@ export class CadastroService extends HttpHelper {
   ).catch(err => { return Observable.throw(err || 'Server error'); });
   return result;
   }
+
+  buscaDatas(dataPulsoParam: Date) {
+    let result = this.getaction(this._buscaData, { datePulso: dataPulsoParam}).map(
+      // tslint:disable-next-line:no-shadowed-variable
+      result => {
+
+          let busca = <any>result;
+          return busca;
+      }
+  ).catch(err => { return Observable.throw(err || 'Server error'); });
+  return result;
+  }
+
   contagem(IdLoraParam: number, valorLido: number) {
     let result = this.getaction(this._contagem, {IdLora: IdLoraParam}).map(
       // tslint:disable-next-line:no-shadowed-variable
@@ -102,9 +119,44 @@ export class CadastroService extends HttpHelper {
   ).catch(err => { return Observable.throw(err || 'Server error'); });
   return result;
   }
-  reportMensalData(dataPulsoInicio: Date, dataPulsoFinal: Date) {
+  reportMonth() {
+    let result = this.getaction(this._reportMonth).map(
+      // tslint:disable-next-line:no-shadowed-variable
+      result => {
+
+          let busca = <any>result;
+          return busca;
+      }
+  ).catch(err => { return Observable.throw(err || 'Server error'); });
+  return result;
+  }
+  reportHoraTotal(mesEAnoValueParam: Date) {
+    let result = this.getaction(this._reportHoraTotal,
+      { mesEAnoValue: mesEAnoValueParam}).map(
+      // tslint:disable-next-line:no-shadowed-variable
+      result => {
+
+          let busca = <any>result;
+          return busca;
+      }
+  ).catch(err => { return Observable.throw(err || 'Server error'); });
+  return result;
+  }
+  reportHoraDisp(IdLoraParam: number, mesEAnoVParam: Date) {
+    let result = this.getaction(this._reportHoraDisp,
+      { IdLora: IdLoraParam, mesEAnoV: mesEAnoVParam}).map(
+      // tslint:disable-next-line:no-shadowed-variable
+      result => {
+
+          let busca = <any>result;
+          return busca;
+      }
+  ).catch(err => { return Observable.throw(err || 'Server error'); });
+  return result;
+  }
+  reportMensalData(dataPulsoInicioParam: Date, dataPulsoFinalParam: Date) {
     let result = this.getaction(this._reportMesData,
-      { dataPulsoInicio: dataPulsoInicio, dataPulsoFinal: dataPulsoFinal}).map(
+      { dataPulsoInicio: dataPulsoInicioParam, dataPulsoFinal: dataPulsoFinalParam}).map(
       // tslint:disable-next-line:no-shadowed-variable
       result => {
 

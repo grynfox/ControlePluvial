@@ -3,9 +3,9 @@
 #include <ArduinoJson.h>
 #include <U8x8lib.h>
 U8X8_SSD1306_128X64_NONAME_SW_I2C u8x8(/* clock=*/ 15, /* data=*/ 4, /* reset=*/ 16);
-const char* ssid = "IT_NET";
+const char* ssid = "PUCPCALDAS";
 const char* password =  "dirtjump2018";
-const char* linkServer = "http://10.0.0.3:80/API/Reports/PulsoHidrometro"; //caminho referente ao BD
+const char* linkServer = "http://172.16.5.175:80/API/Reports/PulsoHidrometro"; //caminho referente ao BD
 IPAddress ip(10, 0, 0, 8); //IP da rede
 IPAddress gateway(10, 0, 0, 1);
 IPAddress subnet(255, 255, 255, 0);
@@ -17,7 +17,7 @@ void setup() {
   Serial.begin(115200);
   u8x8.begin();
   u8x8.setFont(u8x8_font_chroma48medium8_r);
-  WiFi.begin(ssid, password);
+  WiFi.begin(ssid);
   //WiFi.config(ip, gateway, subnet);  //Habilita as configurações de Rede 
 
   while (WiFi.status() != WL_CONNECTED) { //Check for the connection

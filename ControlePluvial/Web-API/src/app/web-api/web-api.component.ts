@@ -22,6 +22,7 @@ export class WebApiComponent implements OnInit {
   IdLora: number;
   IdProd: number;
   arduinos: any[];
+  datas: any[];
   contagemDados: any[];
   contagem: number;
   codFlux: number;
@@ -30,9 +31,14 @@ export class WebApiComponent implements OnInit {
   relatorios: any[];
   dataPulsoInicio: Date;
   dataPulsoFinal: Date;
+  mesEAnoValue: Date;
+  mesEAnoV: Date;
   DadosCarregados = false;
   DadosCarregadosData = false;
   DadosCarregadosDisp = false;
+  DadosCarregadosMonth = false;
+  DadosCarregadosHoraTotal = false;
+  DadosCarregadosHoraDisp = false;
   lineChartData =  {
     chartType: 'LineChart',
     dataTable: [
@@ -43,6 +49,7 @@ export class WebApiComponent implements OnInit {
       ['2007',  '1030']
     ],
     options: {'title': 'Consumo de agua'},
+
   };
   barChartData =  {
     chartType: 'BarChart',
@@ -55,6 +62,28 @@ export class WebApiComponent implements OnInit {
     ],
     options: {'title': 'Consumo de agua'},
   };
+  monthChartData =  {
+    chartType: 'BarChart',
+    dataTable: [
+      ['Mês', 'Consumo'],
+      ['2004',  '1000'],
+      ['2005',  '1170'],
+      ['2006',  '660'],
+      ['2007',  '1030']
+    ],
+    options: {'title': 'Consumo Total Mensal'},
+  };
+  monthLineChartData =  {
+    chartType: 'LineChart',
+    dataTable: [
+      ['Mês', 'Consumo'],
+      ['2004',  '1000'],
+      ['2005',  '1170'],
+      ['2006',  '660'],
+      ['2007',  '1030']
+    ],
+    options: {'title': 'Consumo Total Mensal'},
+  };
   pieChartData =  {
     chartType: 'PieChart',
     dataTable: [
@@ -66,6 +95,7 @@ export class WebApiComponent implements OnInit {
       ['Sleep',    '7']
     ],
     options: {'title': 'Consumo'},
+
   };
   constructor(private service: CadastroService) {
      this.buscarArduino();
@@ -75,6 +105,9 @@ export class WebApiComponent implements OnInit {
      this.reportsMensalPieChart();
      this.reportsMensalLineChartData();
      this.contagemGeral();
+     this.reportsMensalChartMonth();
+     this.reportsLineChartMonth();
+     //this.buscarData();
 
   }
 
@@ -104,6 +137,12 @@ export class WebApiComponent implements OnInit {
       .buscaArduino(this.IdLora, this.NomeArd)
       .subscribe(retorno => (this.arduinos = retorno));
   }
+  buscarData() {
+    this.service
+      .buscaDatas(this.dataPulso)
+      .subscribe(retorno => (this.datas = retorno));
+      console.log(this.datas);
+  }
   apagarArd() {
     this.service
       .apagaArd(this.IdLora)
@@ -120,6 +159,46 @@ export class WebApiComponent implements OnInit {
       .subscribe(retorno => {
         this.lineChartData.dataTable = [['Data', 'Consumo'], ...this.processaResposta(retorno)];
         this.DadosCarregados = true;
+        console.log(this.lineChartData);
+      });
+
+  }
+  reportsMensalChartMonth() {
+    this.DadosCarregadosMonth = false;
+    this.service.reportMonth()
+      .subscribe(retorno => {
+        this.monthChartData.dataTable = [['Mês', 'Consumo'], ...this.processaResposta(retorno)];
+        this.DadosCarregadosMonth = true;
+        console.log(this.monthChartData);
+      });
+
+  }
+  reportsLineChartMonth() {
+    this.DadosCarregadosMonth = false;
+    this.service.reportMonth()
+      .subscribe(retorno => {
+        this.monthLineChartData.dataTable = [['Mês', 'Consumo'], ...this.processaResposta(retorno)];
+        this.DadosCarregadosMonth = true;
+        console.log(this.monthLineChartData);
+      });
+
+  }
+  reportsLineChartHoraTotal() {
+    this.DadosCarregadosHoraTotal = false;
+    this.service.reportHoraTotal(this.mesEAnoValue)
+      .subscribe(retorno => {
+        this.lineChartData.dataTable = [['Hora', 'Consumo'], ...this.processaResposta(retorno)];
+        this.DadosCarregadosHoraTotal = true;
+        console.log(this.lineChartData);
+      });
+
+  }
+  reportsLineChartHoraDisp() {
+    this.DadosCarregadosHoraDisp = false;
+    this.service.reportHoraDisp(this.IdLora, this.mesEAnoV)
+      .subscribe(retorno => {
+        this.lineChartData.dataTable = [['Hora', 'Consumo'], ...this.processaResposta(retorno)];
+        this.DadosCarregadosHoraDisp = true;
         console.log(this.lineChartData);
       });
 
@@ -164,15 +243,22 @@ export class WebApiComponent implements OnInit {
       });
 
   }
-  AtualizaGrafico(){
+AtualizaLista(){
+  this.buscarArduino();
+  this.contagemGeral();
+}
+
+  AtualizaGrafico() {
     this.reportsMensalLineChart();
     this.reportsMensalBarChart();
+    this.reportsMensalChartMonth();
+    this.reportsLineChartMonth();
   }
-  processaResposta(retorno: Array<{Name: string, Value: number}>){
+  processaResposta(retorno: Array<{Name: string, Value: number}>) {
     const retProcessado = new Array<any>();
 
     retorno.forEach(row => {
-      retProcessado.push([row.Name,row.Value]);
+      retProcessado.push([row.Name, row.Value]);
     });
 
     return retProcessado;
@@ -180,7 +266,7 @@ export class WebApiComponent implements OnInit {
 
 
 
-  error(ev){
+  error(ev) {
     console.log(ev);
   }
 

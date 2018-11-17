@@ -31,6 +31,7 @@ namespace ControlePluvial.API
         {
             return this.banco.Arduino.ToList();
         }
+
         [System.Web.Http.Route("API/Arduino/AlteraArd")]
         [System.Web.Http.HttpPut]
         public IHttpActionResult AlteraArd([FromUri] int IdLora, [FromBody] Arduino value) {

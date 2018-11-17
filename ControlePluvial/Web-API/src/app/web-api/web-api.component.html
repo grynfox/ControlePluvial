@@ -45,12 +45,9 @@
 <form [ngSwitch]="aba" style="background-color: rgb(255, 255, 255); border-color: rgb(255, 255, 255);" >
   <!--home !-->
   <section *ngSwitchCase="'home'">
-
-  </section>
-  <section *ngSwitchCase="'home'">
     <div class="container">
         <br>
-        <h3>Consumo Atual</h3>
+        <h3>Consumo Diário do Mês Atual</h3>
         <br>
         <google-chart [data]="lineChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
         <br><br>
@@ -172,51 +169,79 @@
     <section *ngSwitchCase="'graficos'">
         <p></p>
         <div class="container">
-              <div class="row">
-                  <div class="col">
-                      <h4>Gráfico Atual</h4>
-                      <p class="lead">
-                        <google-chart [data]="lineChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
-                      </p>
-                      </div>
-                <div class="col">
-                    <h4>Por Período</h4>
-                    <div class="input-group">
-                        <input type="date" id="dataPulsoInicio" [ngModel] ="dataPulsoInicio" [(value)]= "dataPulsoInicio" (ngModelChange)="dataPulsoInicio = $event" />
-                        <div class="input-group-addon"> até </div>
-                        <input type="date" id="dataPulsoFinal" [ngModel] ="dataPulsoFinal" [(value)]= "dataPulsoFinal" (ngModelChange)="dataPulsoFinal = $event" />
-                    </div>
-                    <a class="btn btn-primary" (click)="reportsMensalLineChartData(dataPulsoInicio, dataPulsoFinal);">Gerar Relatorio</a>
-                    <google-chart [data]="lineChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
-              </div>
-              </div>
-          </div>
-        </section>
-        <section *ngSwitchCase="'graficos'">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true" (click)="AtualizaGrafico();">Consumo Diário do Mês Atual</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false" (click)="AtualizaGrafico();">Percentual Médio Diário ou Período </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false" (click)="AtualizaGrafico();">Consumo Total por Mês</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" id="hour-tab" data-toggle="tab" href="#hour" role="tab" aria-controls="hour" aria-selected="false" (click)="AtualizaGrafico();">Consumo Total por Hora</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane show active" id="home" role="tabpanel" aria-labelledby="home-tab" >
+            <div class="container">
+            <google-chart [data]="lineChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
+            <br>
             <p></p>
-          <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <h4>Percentual recebido por dia</h4>
-                        <div class="form-group">
-                          <select [(ngModel)]="IdLora" class="custom-select"  name="categorias">
-                              <option *ngFor="let busca of arduinos" [value]="busca.IdLora">{{busca.IdLora}} | {{busca.NomeArd}}</option>
-                          </select>
-                          <a class="btn btn-primary" (click)="reportsMensalPieChartDisp(IdLora);">Gerar Relatorio</a>
-                        </div>
-                          <google-chart [data]="pieChartData" *ngIf="DadosCarregadosDisp"  (chartError)='error($event)'></google-chart>
-                    </div>
-                   <div class="col">
-                      <h4>Consumo em Barras</h4>
-                      <google-chart [data]="barChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
-                 </div>
-                </div>
-              </div>
-            </section>
+            <google-chart [data]="barChartData" *ngIf="DadosCarregados"  (chartError)='error($event)'></google-chart>
+          </div>
+          </div>
+          <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab" >
+            <br>
+             <form class="form-inline">
+                  <input class="form-control"  [(ngModel)]= "dataPulsoInicio" id="dataPulsoInicio" name="dataPulsoInicio" type="date" (ngModelChange)="dataPulsoInicio = $event" required>
+                  <input class="form-control"  [(ngModel)]= "dataPulsoFinal" id="dataPulsoFinal" name="dataPulsoFinal" type="date" (ngModelChange)="dataPulsoFinal = $event" required>
+
+                  <a class="btn btn-primary" (click)="reportsMensalLineChartData(dataPulsoInicio, dataPulsoFinal);">Gerar Relatorio</a>
+              </form>
+                <google-chart [data]="lineChartData" *ngIf="DadosCarregadosData"  (chartError)='error($event)'></google-chart>
+                <br>
+                <form class="form-inline">
+              <select [(ngModel)]="IdLora" class="form-control"  name="categorias">
+                  <option *ngFor="let busca of arduinos" [value]="busca.IdLora">{{busca.IdLora}} | {{busca.NomeArd}}</option>
+              </select>
+              <a class="btn btn-primary" (click)="reportsMensalPieChartDisp(IdLora); ">Gerar Relatorio</a>
+              </form>
+              <br>
+              <google-chart [data]="pieChartData" *ngIf="DadosCarregadosDisp"  (chartError)='error($event)'></google-chart>
+            </div>
+            <div class="tab-pane" id="contact" role="tabpanel" aria-labelledby="contact-tab" >
+                <google-chart [data]="monthChartData" *ngIf="DadosCarregadosMonth"  (chartError)='error($event)'></google-chart>
+                  <br>
+                <google-chart [data]="monthLineChartData" *ngIf="DadosCarregadosMonth"  (chartError)='error($event)'></google-chart>
+          </div>
+          <div class="tab-pane" id="hour" role="tabpanel" aria-labelledby="hour-tab" >
+            <br>
+            <form class="form-inline">
+              <input class="form-control"  [(ngModel)]= "mesEAnoValue" id="mesEAnoValue" name="mesEAnoValue" type="date" (ngModelChange)="mesEAnoValue = $event" required>
+              <a class="btn btn-primary" (click)="reportsLineChartHoraTotal(mesEAnoValue);">Gerar Relatorio</a>
+           </form>
+           <google-chart [data]="lineChartData" *ngIf="DadosCarregadosHoraTotal"  (chartError)='error($event)'></google-chart>
+                <br>
+                <p></p>
+                <form class="form-inline">
+                <select [(ngModel)]="IdLora" class="form-control"  name="categorias">
+                    <option *ngFor="let busca of arduinos" [value]="busca.IdLora">{{busca.IdLora}} | {{busca.NomeArd}}</option>
+                </select>
+                <input class="form-control"  [(ngModel)]= "mesEAnoV" id="mesEAnoV" name="mesEAnoV" type="date" (ngModelChange)="mesEAnoV = $event" required>
+                <a class="btn btn-primary" (click)="reportsLineChartHoraDisp(IdLora, mesEAnoV); " (ngModelChange)="IdLora = $event">Gerar </a>
+                </form>
+                <google-chart [data]="lineChartData" *ngIf="DadosCarregadosHoraDisp"  (chartError)='error($event)'></google-chart>
+        </div>
+          </div>
+      </div>
+        </section>
+
 <section *ngSwitchCase="'config'">
   <div class="container">
       <br>
-  <a class="btn btn-primary" (click)="AtualizaGrafico();">Atualizar Graficos</a>
+  <a class="btn btn-primary" (click)="AtualizaGrafico(); AtualizaLista();">Atualizar </a>
   </div>
 
 </section>
@@ -226,7 +251,8 @@
 <div class="container" >
     <div class="card text-center">
         <div class="card-header">
-              <a class="nav-link active">Dispositivos</a>
+              <a class="nav-link active">Dispositivos   <a class="btn btn-primary" (click)="AtualizaLista();">Atualizar </a></a>
+
         </div>
         <div class="card-body">
             <form>
@@ -297,7 +323,7 @@
                       </div>
                     </div>
                   </div>
-                  <a class="btn btn-primary btn-block" (click)="alterarArd(IdLora);">Alterar Categoria</a>
+                  <a class="btn btn-primary btn-block" (click)="alterarArd(IdLora); AtualizaLista();">Alterar Descrição</a>
                 </form>
               </div>
             </div>
@@ -319,7 +345,7 @@
                           </div>
                         </div>
                       </div>
-                      <a class="btn btn-primary btn-block" (click)="apagarArd(IdLora);">Deletar Categoria</a>
+                      <a class="btn btn-primary btn-block" (click)="apagarArd(IdLora); AtualizaLista();">Deletar Dispositivo</a>
                     </form>
                   </div>
                 </div>
@@ -328,6 +354,7 @@
     </div>
   </section>
   <section *ngSwitchCase="'reportPulsosDisp'">
+    <div class="container">
     <div class="card card-register mx-auto mt-5">
       <div class="card-header text-center">Relatorio de Consumo Por Dispositivo</div>
       <div class="card-body">
@@ -335,13 +362,13 @@
               <div class="col-md-12">
                 <label for="arduinos">Selecione o Dispositivo</label>
                   <div class="form-group">
-                    <select [(ngModel)]="IdLora" class="custom-select"  name="arduinos">
+                    <select [(ngModel)]="IdLora" class="select"  name="arduinos">
                         <option *ngFor="let busca of arduinos" [value]="busca.IdLora">{{busca.IdLora}} | {{busca.NomeArd}}</option>
                     </select>
+                    <a class="btn btn-primary" (click)="reportsPulsosDisp(IdLora);">Gerar Relatorio</a>
                   </div>
               </div>
             </div>
-            <a class="btn btn-primary" (click)="reportsPulsosDisp(IdLora);">Gerar Relatorio</a>
         <form>
           <div class="table-responsive">
               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -364,12 +391,13 @@
         </form>
       </div>
     </div>
+  </div>
   </section>
   <section *ngSwitchCase="'reportPulsos'">
   <div class="container">
     <div class="card text-center">
         <div class="card-header">
-              <a class="nav-link active">Pulsos</a>
+              <a class="nav-link active">Pulsos  <a class="btn btn-primary" (click)="AtualizaLista();">Atualizar </a></a>
         </div>
         <div class="card-body">
             <form>
@@ -396,24 +424,6 @@
       </div>
   </div>
 </section>
-    <!--<section *ngSwitchCase="'sobreNos'">
-    <div class="col-lg-12 menu-fixed">
-      <div class="card text-center">
-        <div class="card-header">
-          <i class="fa fa-bar-chart"></i> Sistema de Controle Pluvial Puc Minas Campus Poços de Caldas</div>
-        <div class="card-body">
-            <h5 class="card-title">Igor Alexandre Saraiva Silva e Claudio Faria</h5>
-            <p class="card-text"> Com os avanços tecnologicos existentes na area de controle, economia
-            e automação de processos a Puc Minas <i>Campus</i> Poços de Caldas viu a necessidade de melhorar
-            seu controle pluvial, fazendo assim um sistema totalmente automatizado de controle. </p>
-        </div>
-        <div class="card-footer small text-muted">
-          <a href="https://www.linkedin.com/in/igoralexandre/" class="btn-outline-info">Linkedin - Igor Saraiva</a>
-          <a href="https://www.linkedin.com/in/igoralexandre/" class="btn-outline-info">Linkedin - Claudio Faria</a>
-        </div>
-      </div>
-    </div>
-  </section>-->
   <section *ngSwitchCase="'sobreNos'">
     <div class="container">
       <div class="row">
